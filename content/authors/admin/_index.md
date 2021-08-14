@@ -42,7 +42,7 @@ social:
   icon_pack: fab
   link: https://www.linkedin.com/
 superuser: true
-title: Nelson Bighetti
+title: Federico Tiberti
 ---
 
 I am a Ph.D. Candidate in the Department of Politics at Princeton University. My research focuses on the historical political economy of state formation and decay with a regional focus on Latin America. At Princeton, I have taught comparative politics, quantitative methods and programming in R. Before  coming to Princeton, I got a BA in Political Science from Universidad de San Andres, Argentina, and worked in policy analysis in national and subnational govenment agencies. I also co-authored a general-interest book on political development in Argentina.
