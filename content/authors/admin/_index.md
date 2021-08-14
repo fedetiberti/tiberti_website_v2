@@ -15,13 +15,13 @@ education:
 email: ""
 highlight_name: false
 interests:
-- Artificial Intelligence
-- Computational Linguistics
-- Information Retrieval
+- Political Economy
+- Comparative International Development
+- Quantitative and Computational Methods
 organizations:
 - name: Princeton University
-  url: https://www.stanford.edu/
-role: Professor of Artificial Intelligence
+  url: https://www.politics.princeton.edu/
+role: Ph.D. Candidate in Politics
 social:
 - icon: envelope
   icon_pack: fas
@@ -37,7 +37,7 @@ social:
   link: https://github.com/fedetiberti
 - icon: linkedin
   icon_pack: fab
-  link: https://www.linkedin.com/
+  link: https://www.linkedin.com/in/federico-tiberti-70886b18
 superuser: true
 title: Federico Tiberti
 ---
