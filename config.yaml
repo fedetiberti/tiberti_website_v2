@@ -6,7 +6,7 @@ theme: "starter-hugo-academic"
 
 title: Federico Tiberti # Website name
 baseurl: 'https://tiberti.netlify.app/' # Website URL
-copyright: '' # Footer text, e.g. '© {year} Me'
+copyright: '© {2021} Federico Tiberti' # Footer text, e.g. '© {year} Me'
 
 ############################
 ## LANGUAGE
@@ -39,7 +39,6 @@ footnotereturnlinkcontents: <sup>^</sup>
 ignoreFiles: [\.ipynb$, .ipynb_checkpoints$, \.Rmd$, \.Rmarkdown$, _cache$]
 permalinks:
   event: '/talk/:slug/'
-  authors: '/author/:slug/'
   tags: '/tag/:slug/'
   categories: '/category/:slug/'
   publication_types: '/publication-type/:slug/'

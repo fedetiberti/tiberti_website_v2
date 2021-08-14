@@ -4,7 +4,7 @@
 widget: pages
 
 # This file represents a page section.
-active: false
+active: true
 headless: true
 
 # Order that this section appears on the page.
@@ -29,19 +29,15 @@ content:
     publication_type: ''
     author: ''
     exclude_featured: true
-design: 2
+design:
   # Choose a view for the listings:
   #   1 = List
   #   2 = Compact
   #   3 = Card
   #   4 = Citation (publication only)
-  view: 4
+  view:
 ---
 
-
-- Taradictor
-
-- Taradictor bis
 
 {{% callout note %}}
 Quickly discover relevant content by [filtering publications](./publication/).
