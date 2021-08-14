@@ -29,7 +29,7 @@ content:
     publication_type: ''
     author: ''
     exclude_featured: true
-design:
+design: 2
   # Choose a view for the listings:
   #   1 = List
   #   2 = Compact
@@ -37,6 +37,11 @@ design:
   #   4 = Citation (publication only)
   view: 4
 ---
+
+
+- Taradictor
+
+- Taradictor bis
 
 {{% callout note %}}
 Quickly discover relevant content by [filtering publications](./publication/).
