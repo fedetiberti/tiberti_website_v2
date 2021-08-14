@@ -37,7 +37,7 @@ social:
   link: https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ
 - icon: github
   icon_pack: fab
-  link: https://github.com/gcushen
+  link: https://github.com/fedetiberti
 - icon: linkedin
   icon_pack: fab
   link: https://www.linkedin.com/
@@ -45,8 +45,6 @@ superuser: true
 title: Nelson Bighetti
 ---
 
-Nelson Bighetti is a professor of artificial intelligence at the Stanford AI Lab. His research interests include distributed robotics, mobile computing and programmable matter. He leads the Robotic Neurobiology group, which develops self-reconfiguring robots, systems of self-organizing robots, and mobile sensor networks.
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.
+I am a Ph.D. Candidate in the Department of Politics at Princeton University. My research focuses on the historical political economy of state formation and decay with a regional focus on Latin America. At Princeton, I have taught comparative politics, quantitative methods and programming in R. Before  coming to Princeton, I got a BA in Political Science from Universidad de San Andres, Argentina, and worked in policy analysis in national and subnational govenment agencies. I also co-authored a general-interest book on political development in Argentina.
 
 {{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/demo_resume.pdf" "newtab" >}}resumé{{< /staticref >}}.
