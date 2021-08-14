@@ -10,7 +10,7 @@ main:
   - name: Posts
     url: '#posts'
     weight: 50
-  - name: Fun & Other Projects
+  - name: Miscellanea
     url: '#projects'
     weight: 60
   - name: Talks
