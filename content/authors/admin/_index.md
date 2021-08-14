@@ -3,15 +3,15 @@ bio: My research interests include distributed robotics, mobile computing and pr
   matter.
 education:
   courses:
-  - course: PhD in Artificial Intelligence
-    institution: Stanford University
-    year: 2012
-  - course: MEng in Artificial Intelligence
-    institution: Massachusetts Institute of Technology
-    year: 2009
-  - course: BSc in Artificial Intelligence
-    institution: Massachusetts Institute of Technology
-    year: 2008
+  - course: PhD Politics
+    institution: Princeton University
+    year: 2022 (expected)
+  - course: MA in Politics
+    institution: Princeton University
+    year: 2018
+  - course: BA in Political Science
+    institution: Universidad de San Andres
+    year: 2013
 email: ""
 highlight_name: false
 interests:
@@ -19,7 +19,7 @@ interests:
 - Computational Linguistics
 - Information Retrieval
 organizations:
-- name: Stanford University
+- name: Princeton University
   url: https://www.stanford.edu/
 role: Professor of Artificial Intelligence
 social:
@@ -31,10 +31,7 @@ social:
   icon: twitter
   icon_pack: fab
   label: Follow me on Twitter
-  link: https://twitter.com/GeorgeCushen
-- icon: graduation-cap
-  icon_pack: fas
-  link: https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ
+  link: https://twitter.com/fedetiberti
 - icon: github
   icon_pack: fab
   link: https://github.com/fedetiberti
