@@ -10,7 +10,7 @@ headless: true
 # Order that this section appears on the page.
 weight: 10
 
-title: Recent Publications
+title: Research
 subtitle: ''
 
 content:
@@ -29,7 +29,7 @@ content:
     publication_type: ''
     author: ''
     exclude_featured: true
-design:
+design: 
   # Choose a view for the listings:
   #   1 = List
   #   2 = Compact
@@ -38,7 +38,3 @@ design:
   view:
 ---
 
-
-{{% callout note %}}
-Quickly discover relevant content by [filtering publications](./publication/).
-{{% /callout %}}
