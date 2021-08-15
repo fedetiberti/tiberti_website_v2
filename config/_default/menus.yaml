@@ -15,6 +15,7 @@ main:
     weight: 50
   - name: Research
     url: 'research/'
+    identifier: "research"
     weight: 20
   - name: Teaching
     url: '#teaching'
