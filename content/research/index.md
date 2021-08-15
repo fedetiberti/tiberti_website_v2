@@ -1,5 +1,6 @@
+
 ---
-summary: Papers and Work in Progress
-title: "Research"
-type: widget_page
+title: "Research"  # Add a page title.
+summary: "Papers and Work in Progress"  # Add a page description.
+type: "widget_page"  # Page type is a Widget Page
 ---
