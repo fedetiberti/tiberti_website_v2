@@ -14,10 +14,10 @@ main:
     url: '#projects'
     weight: 50
   - name: Research
-    url: '#featured'
+    url: '#research'
     weight: 20
   - name: Teaching
-    url: courses/
+    url: '#teaching'
     weight: 30
   - name: Contact
     url: '#contact'
