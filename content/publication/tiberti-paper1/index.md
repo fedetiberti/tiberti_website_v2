@@ -1,6 +1,6 @@
 ---
 title: "Democratization and Local Bureaucratic Capacity in Argentina"
-date: 2021
+date: 2021-04-25
 authors: ["Federico Tiberti"]
 publication: "Working Paper"
 publication_types: ["2"]
