@@ -10,7 +10,7 @@ headless: true
 # Order that this section appears on the page.
 weight: 10
 
-title: Research
+title: Working Papers
 subtitle: ''
 
 content:
@@ -28,7 +28,7 @@ content:
     category: ''
     publication_type: ''
     author: ''
-    exclude_featured: false
+    exclude_featured: true
 design: 
   # Choose a view for the listings:
   #   1 = List
