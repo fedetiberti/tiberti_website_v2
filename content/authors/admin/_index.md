@@ -46,4 +46,4 @@ I am a Ph.D. Candidate in the Department of Politics at Princeton University. I 
 
 Before coming to Princeton, I got a BA in Political Science from [Universidad de San Andres](https://udesa.edu.ar/), Argentina, and worked in policy analysis in national and subnational govenment agencies. I also co-authored a general-interest [book on political development in Argentina](https://www.loc.gov/item/2014510963/).
 
-{{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/demo_resume.pdf" "newtab" >}}resumé{{< /staticref >}}.
+{{< icon name="download" pack="fas" >}} Download my {{< staticref "uploads/cv_tiberti_mar21.pdf" "newtab" >}}CV{{< /staticref >}}.
