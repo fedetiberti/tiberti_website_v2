@@ -21,7 +21,7 @@ content:
 #   0: Disable email form
 #   1: Netlify (requires that the site is hosted by Netlify)
 #   2: formspree.io
-email_form = 1
+email_form: 1
 # Enable CAPTCHA challenge to reduce spam?
 captcha: false
   
