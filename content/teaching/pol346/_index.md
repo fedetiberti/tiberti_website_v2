@@ -7,7 +7,7 @@ summary: This course introduces students to intermediate and advanced topics in 
 toc: false
 draft: false
 menu:
-  pol345:
+  pol346:
     name: Overview
     weight: 20
 type: book
