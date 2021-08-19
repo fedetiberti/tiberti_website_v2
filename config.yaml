@@ -6,7 +6,7 @@ theme: "starter-hugo-academic"
 
 title: Federico Tiberti # Website name
 baseurl: 'https://tiberti.netlify.app/' # Website URL
-copyright: '© {2021} Federico Tiberti' # Footer text, e.g. '© {year} Me'
+copyright: '© {year} Federico Tiberti' # Footer text, e.g. '© {year} Me'
 
 ############################
 ## LANGUAGE
