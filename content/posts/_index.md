@@ -1,7 +1,5 @@
 ---
-header:
-  caption: ""
-  image: ""
-title: Posts
-view: 2
+title: "Posts"  # Add a page title.
+#summary: "Papers and Work in Progress"  # Add a page description.
+type: "widget_page"  # Page type is a Widget Page
 ---
