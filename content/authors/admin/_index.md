@@ -1,6 +1,5 @@
 ---
-bio: My research interests include distributed robotics, mobile computing and programmable
-  matter.
+bio: My interests include comparative political economy, development, statistical methods and data science.
 education:
   courses:
   - course: PhD Politics
