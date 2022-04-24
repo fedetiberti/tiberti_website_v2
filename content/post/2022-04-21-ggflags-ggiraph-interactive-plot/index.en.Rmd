@@ -11,16 +11,15 @@ tags:
 - regression
 ---
 
-For those looking for an alternative to plotly to create vectorized/interactive graphics keeping ggplot syntax: [ggiraph](https://davidgohel.github.io/ggiraph/#:~:text=ggiraph%20is%20a%20tool%20that,when%20used%20in%20shiny%20applications.) seems to be a great option. Brief example below. I downloaded [some data on wine consumption per capita](https://ourworldindata.org/grapher/wine-consumption-per-person) and joined it to data on GDP per capita, using the great [WDI](https://cran.r-project.org/web/packages/WDI/WDI.pdf) package to interact with the World Bank API (inspired by [a tweet by Andres Lopez](https://twitter.com/anlopez1962/status/1517211524615618560?s=20&t=h4b1KpWNbwA3bTkg8q1Jxw)). I use the awesome ggflags
+For those looking for an alternative to plotly to create vectorized/interactive graphics keeping ggplot syntax: [ggiraph](https://davidgohel.github.io/ggiraph/#:~:text=ggiraph%20is%20a%20tool%20that,when%20used%20in%20shiny%20applications.) seems to be a great option. Brief example below. I downloaded [some data on wine consumption per capita](https://ourworldindata.org/grapher/wine-consumption-per-person) and joined it to data on GDP per capita, using the great [WDI](https://cran.r-project.org/web/packages/WDI/WDI.pdf) package to interact with the World Bank API (inspired by [a tweet by Andres Lopez](https://twitter.com/anlopez1962/status/1517211524615618560?s=20&t=h4b1KpWNbwA3bTkg8q1Jxw)). I use the awesome [ggflags package](https://github.com/jimjam-slam/ggflags) to plot each country with its flag instead of a point.
 
+```{r, echo=TRUE, message=FALSE, warning=FALSE, error=FALSE}
 
-```{r, echo=TRUE, message=FALSE, warning=FALSE}
-
-lapply(c("tidyverse", "WDI", "countrycode", "ggiraph", "ggflags"), require, character.only=T)
+lapply(c("tidyverse", "WDI", "countrycode", "ggiraph", "ggflags"), require, character.only=T,verbose)
 
 gdppc <- WDI::WDI(indicator = "NY.GDP.PCAP.PP.KD", start = 2019, end = 2019) %>% 
   setNames(c("code", "country", "gdppc", "year")) %>% 
-  select(-year) %>% 
+  select(-year) %>%
   mutate(code = tolower(code))
 
 vino <- read_csv("wine-consumption-per-person.csv") %>% 
@@ -44,9 +43,7 @@ vino %>%
 ```
 
 
-
-
-
+ggiraph plots build on ggplot syntax. The geometry geom_point_interactive is an extended version of geom_point with additional interactive aesthetics.
 
 
 ```{r}
@@ -66,5 +63,30 @@ giraffe_points <- vino %>%
 girafe(ggobj = giraffe_points)
   
 ```
+
+Using flags *and* points:
+
+```{r}
+giraffe_points <- vino %>% 
+  mutate(country.x = str_replace_all(country.x, "'", ""),
+    log_gdp = log(gdppc), 
+         log_wine = log(wine)) %>% 
+  ggplot(aes(x=log_gdp, y=wine)) +
+ theme_classic() +
+  geom_flag(aes(country=code), size=3) +
+  geom_point_interactive(aes(tooltip = country.x, data_id = country.x), alpha=0) +
+  labs(x="Log GDP per capita, PPP, 2019", y="Wine consumption per capita, 2019") +
+  theme(axis.text = element_text(face="bold", size=8), 
+        axis.title = element_text(face= "bold", size=12), 
+        plot.caption = element_text(size=6),
+        plot.title = element_text(size=18, face="bold"))
+
+girafe(ggobj = giraffe_points)
+  
+```
+
+
+
+
 
 
