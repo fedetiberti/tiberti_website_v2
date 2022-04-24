@@ -51,7 +51,7 @@ vino %>%
 
 
 ```{r}
- vino %>% 
+giraffe_points <- vino %>% 
   mutate(log_gdp = log(gdppc), 
          log_wine = log(wine)) %>% 
   ggplot(aes(x=log_gdp, y=wine)) +
@@ -62,6 +62,8 @@ vino %>%
         axis.title = element_text(face= "bold", size=12), 
         plot.caption = element_text(size=6),
         plot.title = element_text(size=18, face="bold"))
+
+girafe(ggobj = giraffe_points)
   
 ```
 
