@@ -5,6 +5,10 @@ date: '2022-04-21'
 lastMod: '2022-04-21'
 slug: poblacion-la-matanza
 categories: R
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: yes
 tags:
 - R Markdown
 - plot
