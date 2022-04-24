@@ -58,7 +58,7 @@ giraffe_points <- vino %>%
   ggplot(aes(x=log_gdp, y=wine)) +
  theme_classic() +
   geom_point_interactive(aes(tooltip = country.x, data_id = country.x)) +
- # labs(x="Log GDP per capita, PPP, 2019", y="Wine consumption per capita, 2019") +
+  labs(x="Log GDP per capita, PPP, 2019", y="Wine consumption per capita, 2019") +
   theme(axis.text = element_text(face="bold", size=8), 
         axis.title = element_text(face= "bold", size=12), 
         plot.caption = element_text(size=6),
