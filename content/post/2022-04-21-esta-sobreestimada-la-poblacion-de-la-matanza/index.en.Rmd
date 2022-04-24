@@ -2,7 +2,6 @@
 title: "¿Está sobreestimada la población de La Matanza?"
 author: "Federico Tiberti"
 date: '2022-04-21'
-lastMod: '2022-04-21'
 slug: poblacion-la-matanza
 categories: R
 image:

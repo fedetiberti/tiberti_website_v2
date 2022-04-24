@@ -2,7 +2,6 @@
 title: "Using ggiraph for interactive plots in R Markdown"
 author: "Federico Tiberti"
 date: '2022-04-23'
-lastMod: '2022-04-23'
 slug: ggiraph-interactive-plot
 categories: R
 tags:
@@ -45,10 +44,10 @@ vino %>%
 ```
 
 
-ggiraph plots build on ggplot syntax. The geometry geom_point_interactive is an extended version of geom_point with additional interactive aesthetics.
+`ggiraph` plots build on ggplot syntax. The geometry `geom_point_interactive` is an extended version of `geom_point` with additional interactive aesthetics, like `tooltip` and `data_id`, which are quite straightforward to apply.
 
 
-```{r}
+```{r, warning=FALSE}
 giraffe_points <- vino %>% 
   mutate(country.x = str_replace_all(country.x, "'", ""),
     log_gdp = log(gdppc), 
@@ -68,7 +67,7 @@ girafe(ggobj = giraffe_points)
 
 Using flags *and* points:
 
-```{r}
+```{r, warning=FALSE}
 giraffe_points <- vino %>% 
   mutate(country.x = str_replace_all(country.x, "'", ""),
     log_gdp = log(gdppc), 
