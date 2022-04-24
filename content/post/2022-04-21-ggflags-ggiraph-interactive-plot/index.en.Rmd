@@ -11,10 +11,10 @@ tags:
 - regression
 ---
 
-For those looking for an alternative to plotly to create vectorized/interactive graphics keeping ggplot syntax: [ggiraph](https://davidgohel.github.io/ggiraph/#:~:text=ggiraph%20is%20a%20tool%20that,when%20used%20in%20shiny%20applications.) seems to be the solution. Brief example below:
+For those looking for an alternative to plotly to create vectorized/interactive graphics keeping ggplot syntax: [ggiraph](https://davidgohel.github.io/ggiraph/#:~:text=ggiraph%20is%20a%20tool%20that,when%20used%20in%20shiny%20applications.) seems to be a great option. Brief example below. I downloaded [some data on wine consumption per capita](https://ourworldindata.org/grapher/wine-consumption-per-person) and joined it to data on GDP per capita, using the great [WDI](https://cran.r-project.org/web/packages/WDI/WDI.pdf) package to interact with the World Bank API (inspired by [a tweet by Andres Lopez](https://twitter.com/anlopez1962/status/1517211524615618560?s=20&t=h4b1KpWNbwA3bTkg8q1Jxw)). I use the awesome ggflags
 
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r, echo=TRUE, message=FALSE, warning=FALSE}
 
 lapply(c("tidyverse", "WDI", "countrycode", "ggiraph", "ggflags"), require, character.only=T)
 
@@ -28,7 +28,6 @@ vino <- read_csv("wine-consumption-per-person.csv") %>%
   filter(year==2019) %>% 
   mutate(code = tolower(countrycode(tolower(code), origin="iso3c", destination = "iso2c"))) %>% 
   left_join(gdppc, by="code")
-
 
 vino %>% 
   mutate(log_gdp = log(gdppc), 
