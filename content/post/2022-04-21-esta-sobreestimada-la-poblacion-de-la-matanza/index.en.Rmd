@@ -2,7 +2,7 @@
 title: "¿Está sobreestimada la población de La Matanza?"
 author: "Federico Tiberti"
 date: '2022-04-21'
-lastMod: '2019-09-05'
+lastMod: '2022-04-21'
 slug: poblacion-la-matanza
 categories: R
 tags:
@@ -11,5 +11,36 @@ tags:
 - regression
 ---
 
-These are the steps that I took to set up my website using blogdown and the [Hugo Academic (Wochemy)](https://wowchemy.com/) theme. I also did a little ["how to" session](https://www.youtube.com/watch?v=BHpkLJieXPE) with some GW political science graduate students where we worked through these steps and got everyone started with a blogdown site. Many of the steps recounted here are based on what I learned from [this super-helpful post](https://alison.rbind.io/blog/2020-12-new-year-new-blogdown/) by Alison Hill. 
+Desde que le dedicamos algo de tiempo a mirar las estadísticas de la pandemia, los resultados de La Matanza nos resultaron llamativos. La mortalidad por covid-19 en La Matanza, estandarizada por edades, es baja comparada con municipios de nivel de pobreza similar.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+source("generar_datos.R")
+
+mortalidad_vacunacion %>% 
+  mutate(matanza = ifelse(departamento == "La Matanza", "1", "0")) %>% 
+  ggplot(aes(x=pobcronica, y=mortalidad_estandarizada)) + 
+  geom_point(aes(color=matanza, size=matanza),show.legend=FALSE) +
+  scale_size_manual(breaks=c("0","1"), values=c(1, 3)) +
+  scale_color_manual(breaks=c("0","1"), values=c("gray66", "steelblue3")) +
+  ggrepel::geom_text_repel(data= mortalidad_vacunacion %>% filter(departamento=="La Matanza"),
+                           aes(label=departamento), size=5)+
+  ggrepel::geom_text_repel(data= mortalidad_vacunacion %>% filter(departamento!="La Matanza"),
+                           aes(label=departamento), size=2)+
+  theme_classic() +
+  labs(x="Tasa de pobreza crónica", y="Mortalidad por covid-19, estandarizada por edades", 
+    caption =  "Gráfico: Mauro Infantino y Federico Tiberti. El dato de mortalidad proviene
+                del Ministerio de Salud. La estandarización por edades está hecha de acuerdo con
+                el censo de 2010 y la estimación de pobreza crónica 
+                para el año 2017 es de Gasparini, Gluzmann y Tornarolli (2019).") +
+  theme(axis.text = element_text(face="bold", size=8), 
+        axis.title = element_text(face= "bold", size=12), 
+        plot.caption = element_text(size=6),
+        plot.title = element_text(size=18, face="bold"))
+
+```
+
+Cuando a los datos de casos y fallecimientos se sumaron los datos de vacunación, la divergencia de La Matanza 
+
+
 
