@@ -4,6 +4,10 @@ author: "Federico Tiberti"
 date: '2022-04-23'
 slug: ggiraph-interactive-plot
 categories: R
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: yes
 tags:
 - R Markdown
 - interactive plot
