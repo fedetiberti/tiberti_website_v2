@@ -1,5 +1,5 @@
 ---
-title: "Using ggiraph for interactive plot in report"
+title: "Using ggiraph for interactive plots in R Markdown"
 author: "Federico Tiberti"
 date: '2022-04-23'
 lastMod: '2022-04-23'
