@@ -1,5 +1,5 @@
 ---
-title: "Cómo hacer un bot de Twitter con Python y serverless deployment en Google Cloud"
+title: "Cómo programar un bot de Twitter en Python con implementación serverless en Google Cloud"
 author: "Federico Tiberti"
 date: '2022-04-26'
 slug: bot-twitter-python-google-cloud
