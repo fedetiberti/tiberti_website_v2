@@ -3,6 +3,9 @@ title: "Using rayshader for 3D plots in R"
 author: "Federico Tiberti"
 date: '2022-05-05'
 slug: rayshader-plot
+output:
+  html_document:
+    keep_md: yes
 categories: R
 image:
   caption: ''
@@ -43,7 +46,7 @@ Rayshader comes with a set of native functions to make 3D plots/maps. The functi
 
 ```{r, webgl=TRUE}
 
-plot_gg(graph, multicore = TRUE, width = 3 ,height=2, scale=250, fov = 70, zoom=0.3)
+plot_gg(graph, multicore = TRUE, width = 2 ,height=1.5, scale=120, fov = 70, zoom=0.355)
 
 ```
 
