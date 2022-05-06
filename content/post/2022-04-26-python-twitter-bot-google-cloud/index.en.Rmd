@@ -14,7 +14,7 @@ tags:
 - Twitter Bot
 ---
 
-Aun a riesgo de que quede obsoleto pronto [si Elon Musk cumple su promesa de erradicar a los bots de Twitter](https://www.elfinanciero.com.mx/tech/2022/04/25/adios-a-los-bots-elon-musk-reafirma-que-buscara-desaparecer-el-spam-tras-compra-de-twitter/), quería escribir un post sobre cómo programar un bot de Twitter simple en Python y hacerlo correr *serverless* en Google Cloud, una buena alternativa para automatizar un script de Python (o de varios otros lenguajes).
+Aun a riesgo de que quede obsoleto pronto [si Elon Musk cumple su promesa de erradicar a los bots de Twitter](https://www.elfinanciero.com.mx/tech/2022/04/25/adios-a-los-bots-elon-musk-reafirma-que-buscara-desaparecer-el-spam-tras-compra-de-twitter/), quería escribir un post sobre cómo programar un bot de Twitter simple en Python y hacerlo correr *serverless* en Google Cloud, una buena alternativa para automatizar un script de Python (o de varios otros lenguajes). 
 
 El primer paso es registrarse como desarrollador de Twitter, para tener acceso a la API. Eso se hace en [developer.twitter.com](https://developer.twitter.com/). En esta instancia, Twitter solo hace un par de preguntas y otorga acceso básico a la API de forma casi inmediata sin problemas.
 
