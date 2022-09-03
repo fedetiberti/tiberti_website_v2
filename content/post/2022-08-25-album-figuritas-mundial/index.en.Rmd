@@ -1,0 +1,81 @@
+---
+title: "¿Cuántos paquetes necesito para completar el álbum de figuritas de Qatar 2022?"
+author: "Federico Tiberti"
+date: "2022-08-25"
+slug: "probabilidades-album"
+categories: R
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: yes
+tags: Simulations
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, results='hide'}
+lapply(c("tidyverse", "janitor", "sf", "tweetrmd"), require, character.only=T)
+
+```
+
+En estos días tuvo bastante difusión un tuit mío en el que calculaba la cantidad de paquetes necesarios para completar el álbum de figuritas del mundial, suponiendo en distintos escenarios que uno no intercambia figuritas con nadie o que sí lo hace.
+
+```{r, echo=FALSE}
+tweetrmd::tweet_embed("https://twitter.com/fedetiberti/status/1562098816312123394")
+```
+
+Voy a describir la simulación y mostrar el código que la genera. Primero, es importante aclarar que en esta simulación estoy partiendo de un supuesto clave: no existen las figuritas difíciles. Esto implica que todas las figuritas tienen la misma probabilidad de aparecer en un paquete. Sí, unos cuantos me cuestionaron este supuesto en las respuestas del tuit, pero [Panini afirma que todas las figuritas son fabricadas en las mismas cantidades y no existen algunas más difíciles de encontrar que otras](https://www.losandes.com.ar/mas-deportes/hablo-panini-el-misterio-de-la-figurita-dificil-y-el-metodo-para-completar-el-album-qatar-2022/).
+
+Una característica adicional del proceso aleatorio de muestreo de figuritas en paquetes, que desconozco, es si cada figurita es una selección aleatoria con reemplazo del conjunto total de 638 figuritas, o si es sin reemplazo hasta completar el paquete. Esto es, si una misma figurita puede aparecer más de una vez en un mismo paquete o no. Como no sé la respuesta a esto, voy a hacer las simulaciones suponiendo una cosa u otra.
+
+Para empezar, podemos simular un paquete de figuritas como un muestreo aleatorio de cinco de las 638 figuritas posibles, sin reemplazo.
+
+```{r 1: muestreo basico}
+sample(1:638, 5, replace = FALSE)
+```
+
+Podemos simular, digamos, 100 paquetes, de la misma forma:
+
+```{r 2: segundo muestreo basico}
+paquetes100 <- unlist(lapply(vector("list", 100), 
+   function(x) if (length(x) == 0) sample(1:638, 5, replace = FALSE) else x))
+paquetes100
+```
+
+Se puede ver fácilmente que algunos números se repiten. Con la función `table()` podemos ver cuántas veces se repite cada elemento en el vector de números de figuritas:
+
+```{r 3: count de figuritas del muestreo basico de 100 paquetes}
+paquetes100 %>% table()
+```
+
+Entonces, podemos definir como un éxito el caso en que (1) aparecen las 638 figuritas y (2) aparecen tantas veces cada una como personas estén intentando completar el album en el escenario que estemos simulando.
+
+```{r}
+personas <- 1
+exito  <- ifelse(length(unique(paquetes100))==638 & min(data.frame(table(paquetes100))$Freq)>=personas, TRUE, FALSE)
+exito
+```
+
+En este caso, obviamente no completamos el album, ya que con 100 paquetes ni siquiera se llega a tener 670 figuritas. Para saber qué probabilidad tenemos de completar el álbum con, digamos, 600 paquetes, podemos hacer la misma simulación mil veces pero cambiando la cantidad de paquetes y ver cuántas veces nos alcanza con esos 600 paquetes para completarlo.
+
+
+```{r 4: simulacion de 600 paquetes con iteraciones}
+simulaciones <- 1000
+personas <- 1
+paquetes <- 600
+exito <- NULL  
+for(j in 1:simulaciones){
+ figus<- NULL
+for(k in 1:paquetes){figus <- c(figus, sample(1:638, 5, replace = FALSE))}
+figus <-  figus %>% table() %>% as.data.frame()
+exito[j] <- ifelse(nrow(figus)==638 & min(figus$Freq)>=personas, TRUE, FALSE)}
+
+exitos <- sum(exito)
+exitos
+
+```
+
+Con 600 paquetes, en 10000 simulaciones solo se llegó a completar el album `r exitos` veces, lo que muestra que aunque no sea imposible sigue siendo extremadamente improbable conseguir las 638 figuritas distintas con 600 paquetes sin intercambio.
+
+El paso siguiente es hacer las simulaciones para distintas cantidades de paquetes, para calcular la probabilidad de completar el álbum con distintos números de paquetes. Cuando terminan de generarse las simulaciones para cada número de paquetes (el loop interno), se guarda el porcentaje de simulaciones "exitosas" (o sea, en que se completó la cantidad deseada de álbumes) en un objeto que luego servirá para ver qué probabilida de éxito hay con cada cantidad de paquetes.
+
+Como mencioné más arriba, primero haré las simulaciones suponiendo que no puede salir una misma figurita dos veces en un paquete, y luego suponiendo que cada figurita es independiente de las demás del paquete.
+
