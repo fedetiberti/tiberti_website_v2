@@ -27,7 +27,7 @@ Para empezar, podemos simular un paquete de figuritas como un muestreo aleatorio
 sample(1:638, 5, replace = FALSE)
 ```
 
-    ## [1] 123 460 485 461 187
+    ## [1] 245 285 298 220 315
 
 Podemos simular, digamos, 100 paquetes, de la misma forma:
 
@@ -37,34 +37,34 @@ paquetes100 <- unlist(lapply(vector("list", 100),
 paquetes100
 ```
 
-    ##   [1] 307 137 397 476 435 113 105 284 243 323 217 156  47 482 290  41  27  68
-    ##  [19] 314 162 499  20 152 600 432 417  93 179 345 303 515 337 207 335 546 474
-    ##  [37]  49 522 141 189 340 309 579 616 224 377 115 348 175 552 230 410 205 211
-    ##  [55]  70 251 153 489 344 429  55 592 515 535 370 163 314 235 493 215 234 324
-    ##  [73] 555 129 393 557 303 498 247 469  68 564 241 352 254 205 552 241 269 271
-    ##  [91] 339 113 109 231 294 184  86 630 132 188 577 540 531  26 520 405 418 609
-    ## [109] 262 572 325 239 137 631  41 355 397 557 270 188 142 477 263 616 467 178
-    ## [127] 324 518 421 288 638 192  99 490 527   1  23 150 540 244 359  23 385 556
-    ## [145] 240 208 190 437 368 429 251 570 407 608 308 228 482 591 385 465 449 276
-    ## [163] 258 428 551 265 261 191 507 296 140 581 168 180 236 489 253 439 432 192
-    ## [181] 269 622  43  93 227 633 556 224 461  84 236  22  33 317 508  61 486 488
-    ## [199] 609   7 481 367 555 226 522 608 244 404 187 401 518 203 252  44 350 184
-    ## [217] 124 452 288  89 632 412 236  53  32 170 214 137 610 597 631 409 487 144
-    ## [235] 311 199 148 438 209 409 187 372 328 591 490 115  98 532 624 416 488 180
-    ## [253] 195 275 456 346 233 522 274 422 387  50 432  14 429 173 184 416 182 322
-    ## [271] 230 519  83 600 300 156 368 584  51 230 322 411 594  78 609 217 395 150
-    ## [289] 243 444 329 142 527 588 370 583 164 175 579 466 297 321 387 242 113 422
-    ## [307] 440 295 338 314 447 325 633 604 368 457  60 623 311 155  59 402 280  78
-    ## [325] 606 118 411 540 534 129 502 544 549 146  93 299 233 635 409 605 535 510
-    ## [343] 450 585 421 267 274  18 543 169 613 318 327 357 596 376 346 506 276 451
-    ## [361] 313 564 408 232 160 522 135 575 151 139 291 341 625 551  17 194 393 286
-    ## [379] 147 315 305 396 553  42 503 175  79 369 146 448  78 549 225 537 634 529
-    ## [397]  70 134  38 452 317 524 396  40 430 275  87 471 546 407 286 497 600 228
-    ## [415] 307  76  94 327  32 369   6 147 470 636 161 584  89 341 120 464 168 485
-    ## [433] 222 324 508 242 265 496 233 225   5 318 125 316 524 451  20 554 549 123
-    ## [451] 554 421  78 358 312 198 292 242  62 212 612 375  75 289  57 340 114 413
-    ## [469] 389   4 180 187 300 244 287 520 625 255 452 127  92 574 115 557 253 209
-    ## [487] 586 608 254 498 136  32 557  28 585 627  87 235  44 422
+    ##   [1] 464 513  11 394  92  83 418  19   2 506 255 601 520 583 306 238 208  47
+    ##  [19] 563 283 414 556 517 116 582  57 471 505 605 186 206   4 304 555  97 199
+    ##  [37] 608  99 277 592 484 563  67 210 559 582 540 309 596 409  36 197 142 545
+    ##  [55]  64 366 132  25 481 350 128 145 500 370 218 339 543 474 232 550 346 300
+    ##  [73] 607 129 360 200 413 399 299 447  58 389  82 301 520 521 181 251 214 389
+    ##  [91] 140 185 461 442 538 257 444 368 516  20 184 232 166  65 293 555  43 268
+    ## [109] 210 140 601 124 513 602 431 136 396 314 634 300  87 259 581 499 210 360
+    ## [127]  10 276 143 214 422 121 344 165 202  27 629  73 531 272 579 630 511 444
+    ## [145]  49 585  20 389 275 601 420 295 353 444 162 460  24 119 367 594  62 455
+    ## [163] 436 109 330 170 483 109 523 500  74  45 352 284 166 419 198 100 103 433
+    ## [181] 587 612 210 247 282 314 370 572 566 438 131 427 428 291 394 628 275 324
+    ## [199] 460 552 410 169 216 189 434 496  63 410 593 413 238 430 439 173  34 125
+    ## [217] 237 317 199 501 426 593  93 500 342 459 437  75 146 421  53 341 286  80
+    ## [235] 512 270 104  71 339 351  13 412 230 279 607 119 247 526 303 548 505 253
+    ## [253]   8 370 226 626 195 211 413 200 245 345 624  50 481 534 344 207  45 425
+    ## [271] 169 540 421 325  17 472 330 473 386 138 531 487 134  31  62 478 317 305
+    ## [289] 273 179 281 413 148 241 445 167 322 278  14 571 273 301 556 280 387 607
+    ## [307] 287 116 191 384  19 269 255 525 114  78 226 347 597 138 349 258 470 105
+    ## [325] 297 416 302  52  94 488  73 462 252 474 386 638 234 318 138  80 459 402
+    ## [343] 141  52 143  87 299 516 108  33 257 528 509 270 312 231 626 127  30   9
+    ## [361] 484 613 302  15 125 418 198  96 337 548 437 260  29 532  55 536 299 107
+    ## [379] 207 495  57 244 269 209 511   9 189  67 406 552 264 625 246  68 480 542
+    ## [397] 145  70 545 344 300 331 581 189 130 185 195 485 460 270 374 538 273 318
+    ## [415] 603  92 424  76 183 283 584 172 548 625 387 223 229 188 358 311 505 579
+    ## [433]  76 536 427 355  91 452 238 173   1 366 569 612 200 176 334 287 137 543
+    ## [451] 343 143 383 302 233 101 104 231 416 349 145  23 482 413 477  86 367 559
+    ## [469] 496 282 181 433   5 634 394 330 472 635 535 115  21 143 484  25 370  14
+    ## [487] 489 340 583 573 314 590 135 599 451 310 525 555 111  43
 
 Se puede ver fácilmente que algunos números se repiten. Con la función `table()` podemos ver cuántas veces se repite cada elemento en el vector de números de figuritas:
 
@@ -73,42 +73,42 @@ paquetes100 %>% table()
 ```
 
     ## .
-    ##   1   4   5   6   7  14  17  18  20  22  23  26  27  28  32  33  38  40  41  42 
-    ##   1   1   1   1   1   1   1   1   2   1   2   1   1   1   3   1   1   1   2   1 
-    ##  43  44  47  49  50  51  53  55  57  59  60  61  62  68  70  75  76  78  79  83 
-    ##   1   2   1   1   1   1   1   1   1   1   1   1   1   2   2   1   1   4   1   1 
-    ##  84  86  87  89  92  93  94  98  99 105 109 113 114 115 118 120 123 124 125 127 
-    ##   1   1   2   2   1   3   1   1   1   1   1   3   1   3   1   1   1   1   1   1 
-    ## 129 132 134 135 136 137 139 140 141 142 144 146 147 148 150 151 152 153 155 156 
-    ##   2   1   1   1   1   3   1   1   1   2   1   2   2   1   2   1   1   1   1   2 
-    ## 160 161 162 163 164 168 169 170 173 175 178 179 180 182 184 187 188 189 190 191 
-    ##   1   1   1   1   1   2   1   1   1   3   1   1   3   1   3   3   2   1   1   1 
-    ## 192 194 195 198 199 203 205 207 208 209 211 212 214 215 217 222 224 225 226 227 
-    ##   2   1   1   1   1   1   2   1   1   2   1   1   1   1   2   1   2   2   1   1 
-    ## 228 230 231 232 233 234 235 236 239 240 241 242 243 244 247 251 252 253 254 255 
-    ##   2   3   1   1   3   1   2   3   1   1   2   3   2   3   1   2   1   2   2   1 
-    ## 258 261 262 263 265 267 269 270 271 274 275 276 280 284 286 287 288 289 290 291 
-    ##   1   1   1   1   2   1   2   1   1   2   2   2   1   1   2   1   2   1   1   1 
-    ## 292 294 295 296 297 299 300 303 305 307 308 309 311 312 313 314 315 316 317 318 
-    ##   1   1   1   1   1   1   2   2   1   2   1   1   2   1   1   3   1   1   2   2 
-    ## 321 322 323 324 325 327 328 329 335 337 338 339 340 341 344 345 346 348 350 352 
-    ##   1   2   1   3   2   2   1   1   1   1   1   1   2   2   1   1   2   1   1   1 
-    ## 355 357 358 359 367 368 369 370 372 375 376 377 385 387 389 393 395 396 397 401 
-    ##   1   1   1   1   1   3   2   2   1   1   1   1   2   2   1   2   1   2   2   1 
-    ## 402 404 405 407 408 409 410 411 412 413 416 417 418 421 422 428 429 430 432 435 
-    ##   1   1   1   2   1   3   1   2   1   1   2   1   1   3   3   1   3   1   3   1 
-    ## 437 438 439 440 444 447 448 449 450 451 452 456 457 461 464 465 466 467 469 470 
-    ##   1   1   1   1   1   1   1   1   1   2   3   1   1   1   1   1   1   1   1   1 
-    ## 471 474 476 477 481 482 485 486 487 488 489 490 493 496 497 498 499 502 503 506 
-    ##   1   1   1   1   1   2   1   1   1   2   2   2   1   1   1   2   1   1   1   1 
-    ## 507 508 510 515 518 519 520 522 524 527 529 531 532 534 535 537 540 543 544 546 
-    ##   1   2   1   2   2   1   2   4   2   2   1   1   1   1   2   1   3   1   1   2 
-    ## 549 551 552 553 554 555 556 557 564 570 572 574 575 577 579 581 583 584 585 586 
-    ##   3   2   2   1   2   2   2   4   2   1   1   1   1   1   2   1   1   2   2   1 
-    ## 588 591 592 594 596 597 600 604 605 606 608 609 610 612 613 616 622 623 624 625 
-    ##   1   2   1   1   1   1   3   1   1   1   3   3   1   1   1   2   1   1   1   2 
-    ## 627 630 631 632 633 634 635 636 638 
-    ##   1   1   2   1   2   1   1   1   1
+    ##   1   2   4   5   8   9  10  11  13  14  15  17  19  20  21  23  24  25  27  29 
+    ##   1   1   1   1   1   2   1   1   1   2   1   1   2   2   1   1   1   2   1   1 
+    ##  30  31  33  34  36  43  45  47  49  50  52  53  55  57  58  62  63  64  65  67 
+    ##   1   1   1   1   1   2   2   1   1   1   2   1   1   2   1   2   1   1   1   2 
+    ##  68  70  71  73  74  75  76  78  80  82  83  86  87  91  92  93  94  96  97  99 
+    ##   1   1   1   2   1   1   2   1   2   1   1   1   2   1   2   1   1   1   1   1 
+    ## 100 101 103 104 105 107 108 109 111 114 115 116 119 121 124 125 127 128 129 130 
+    ##   1   1   1   2   1   1   1   2   1   1   1   2   2   1   1   2   1   1   1   1 
+    ## 131 132 134 135 136 137 138 140 141 142 143 145 146 148 162 165 166 167 169 170 
+    ##   1   1   1   1   1   1   3   2   1   1   4   3   1   1   1   1   2   1   2   1 
+    ## 172 173 176 179 181 183 184 185 186 188 189 191 195 197 198 199 200 202 206 207 
+    ##   1   2   1   1   2   1   1   2   1   1   3   1   2   1   2   2   3   1   1   2 
+    ## 208 209 210 211 214 216 218 223 226 229 230 231 232 233 234 237 238 241 244 245 
+    ##   1   1   4   1   2   1   1   1   2   1   1   2   2   1   1   1   3   1   1   1 
+    ## 246 247 251 252 253 255 257 258 259 260 264 268 269 270 272 273 275 276 277 278 
+    ##   1   2   1   1   1   2   2   1   1   1   1   1   2   3   1   3   2   1   1   1 
+    ## 279 280 281 282 283 284 286 287 291 293 295 297 299 300 301 302 303 304 305 306 
+    ##   1   1   1   2   2   1   1   2   1   1   1   1   3   3   2   3   1   1   1   1 
+    ## 309 310 311 312 314 317 318 322 324 325 330 331 334 337 339 340 341 342 343 344 
+    ##   1   1   1   1   3   2   2   1   1   1   3   1   1   1   2   1   1   1   1   3 
+    ## 345 346 347 349 350 351 352 353 355 358 360 366 367 368 370 374 383 384 386 387 
+    ##   1   1   1   2   1   1   1   1   1   1   2   2   2   1   4   1   1   1   2   2 
+    ## 389 394 396 399 402 406 409 410 412 413 414 416 418 419 420 421 422 424 425 426 
+    ##   3   3   1   1   1   1   1   2   1   5   1   2   2   1   1   2   1   1   1   1 
+    ## 427 428 430 431 433 434 436 437 438 439 442 444 445 447 451 452 455 459 460 461 
+    ##   2   1   1   1   2   1   1   2   1   1   1   3   1   1   1   1   1   2   3   1 
+    ## 462 464 470 471 472 473 474 477 478 480 481 482 483 484 485 487 488 489 495 496 
+    ##   1   1   1   1   2   1   2   1   1   1   2   1   1   3   1   1   1   1   1   2 
+    ## 499 500 501 505 506 509 511 512 513 516 517 520 521 523 525 526 528 531 532 534 
+    ##   1   3   1   3   1   1   2   1   2   2   1   2   1   1   2   1   1   2   1   1 
+    ## 535 536 538 540 542 543 545 548 550 552 555 556 559 563 566 569 571 572 573 579 
+    ##   1   2   2   2   1   2   2   3   1   2   3   2   2   2   1   1   1   1   1   2 
+    ## 581 582 583 584 585 587 590 592 593 594 596 597 599 601 602 603 605 607 608 612 
+    ##   2   2   2   1   1   1   1   1   2   1   1   1   1   3   1   1   1   3   1   2 
+    ## 613 624 625 626 628 629 630 634 635 638 
+    ##   1   1   2   2   1   1   1   2   1   1
 
 Entonces, podemos definir como un éxito el caso en que (1) aparecen las 638 figuritas y (2) aparecen tantas veces cada una como personas estén intentando completar el album en el escenario que estemos simulando.
 
@@ -137,10 +137,248 @@ exitos <- sum(exito)
 exitos
 ```
 
-    ## [1] 3
+    ## [1] 2
 
-Con 600 paquetes, en 10000 simulaciones solo se llegó a completar el album 3 veces, lo que muestra que aunque no sea imposible sigue siendo extremadamente improbable conseguir las 638 figuritas distintas con 600 paquetes sin intercambio.
+Con 600 paquetes, en 10000 simulaciones solo se llegó a completar el album 2 veces, lo que muestra que aunque no sea imposible sigue siendo extremadamente improbable conseguir las 638 figuritas distintas con 600 paquetes sin intercambio.
 
 El paso siguiente es hacer las simulaciones para distintas cantidades de paquetes, para calcular la probabilidad de completar el álbum con distintos números de paquetes. Cuando terminan de generarse las simulaciones para cada número de paquetes (el loop interno), se guarda el porcentaje de simulaciones “exitosas” (o sea, en que se completó la cantidad deseada de álbumes) en un objeto que luego servirá para ver qué probabilida de éxito hay con cada cantidad de paquetes.
 
 Como mencioné más arriba, primero haré las simulaciones suponiendo que no puede salir una misma figurita dos veces en un paquete, y luego suponiendo que cada figurita es independiente de las demás del paquete.
+
+# Suponiendo no independencia dentro del paquete
+
+Suponiendo que cada figurita no es independiente de las otras dentro de un mismo paquete, cada figurita es una selección aleatoria sin reemplazo del conjunto de 638 figuritas posibles con probabilidad distribuida uniformemente, defino dos funciones. A partir de este supuesto, defino dos funciones, `calcular_exito()` y `simular_paquete()`. `calcular_exito()` toma como argumento la cantidad de paquetes que se está simulando, que es el producto de la cantidad de personas participando y la cantidad de paquetes que cada una compra, genera una selección aleatoria de esa cantidad de figuritas, y verifica si se completó la cantidad buscada de álbumes, devolviendo. La función `simular_paquete()` toma como argumentos la cantidad de personas participando, las cantidades de paquetes que se quieren simular y la cantidad de simulaciones que se quiere correr para cada número de paquetes. Corre estas simulaciones usando `calcular_exito()` y para cada número de paquetes define la probabilidad de éxito como el porcentaje de simulaciones que devolvieron `TRUE` como resultado de `calcular_exito()` sobre el total de simulaciones ejecutadas.
+
+En este caso, empiezo corriendo 250 simulaciones por cada número de paquetes entre 1 y 1600 Para agilizar las simulaciones (que son bastante demandantes para la computadora), no simulo todos los números del intervalo sino solo los impares
+
+``` r
+calcular_exito <- function(packs){
+  figus<- as.data.frame(table(unlist(lapply(vector("list", packs), 
+   function(x) if (length(x) == 0) sample(1:638, 5, replace = FALSE) else x)))) 
+  return(ifelse(nrow(figus)==638 & min(figus$Freq)>=personas, TRUE, FALSE))}
+
+simular_paquete <- function(personas, paquetes, simulaciones){
+  packs <- personas*paquetes
+  resultado <- unlist(lapply(vector("list", simulaciones), function(x) if (length(x) == 0) calcular_exito(packs) else x))
+  resultado <- sum(resultado)/simulaciones*100
+  return(resultado)
+}
+
+personas=1
+simulaciones=250
+
+prob_completar <- unlist(lapply(seq(1, 1600, by=2), function(x) simular_paquete(personas=1, paquetes=x, simulaciones=250)))
+completado <- data.frame(paquetes = seq(1, 1600, by=2), prob_completar = prob_completar)
+```
+
+Con este objeto ya generado, se puede graficar la probabilidad de éxito con cada número de paquetes:
+
+``` r
+completado %>% ggplot(aes(x=paquetes, y=prob_completar)) +
+  geom_point(alpha = 0.5, color="gray44", size=0.8) + theme_light() +
+  scale_x_continuous(breaks = seq(0, 2000, by=200)) +
+  scale_y_continuous(breaks = seq(0, 100, by=10), 
+                     labels=scales::label_number(accuracy=1, suffix="%")) +
+  labs(x="Cantidad de paquetes", y="Probabilidad de completar el album", 
+       title = "Una sola persona") +
+  theme(axis.text=element_text(face="bold", size=12), 
+        plot.title = element_text(face="bold", size=22), 
+        axis.title = element_text(face="bold", size=14))
+```
+
+<img src="{{< blogdown/postref >}}index.en_files/figure-html/6: grafico para simulacion completa para una persona-1.png" width="672" />
+
+Se ve en el gráfico que se necesitan casi 1100 paquetes para llegar a una probabilidad de 90% de completar el álbum. Podemos repetir las simulaciones para 2, 5 y 10 personas:
+
+``` r
+personas=2
+simulaciones=250
+
+prob_completar <- unlist(lapply(seq(1, 1600, by=2), function(x) simular_paquete(personas=2, paquetes=x, simulaciones=250)))
+completado2 <- data.frame(paquetes = seq(1, 1600, by=2), prob_completar = prob_completar)
+```
+
+``` r
+personas=5
+simulaciones=250
+
+prob_completar <- unlist(lapply(seq(1, 1600, by=2), function(x) simular_paquete(personas=5, paquetes=x, simulaciones=250)))
+completado5 <- data.frame(paquetes = seq(1, 1600, by=2), prob_completar = prob_completar)
+```
+
+``` r
+personas=10
+simulaciones=250
+
+prob_completar <- unlist(lapply(seq(1, 1600, by=2), function(x) simular_paquete(personas=10, paquetes=x, simulaciones=250)))
+completado10 <- data.frame(paquetes = seq(1, 1600, by=2), prob_completar = prob_completar)
+```
+
+El mismo gráfico de arriba para dos personas. Se ve que el número de paquetes en que la probabilidad de completar alcanza 90% baja a aproximadamente 700:
+
+``` r
+completado2 %>% ggplot(aes(x=paquetes, y=prob_completar)) +
+  geom_point(alpha = 0.5, color="gray44", size=0.8) + theme_light() +
+  scale_x_continuous(breaks = seq(0, 2000, by=200)) +
+  scale_y_continuous(breaks = seq(0, 100, by=10), 
+                     labels=scales::label_number(accuracy=1, suffix="%")) +
+  labs(x="Cantidad de paquetes por persona", y="Probabilidad de completar los albumes", 
+       title = "Dos personas") +
+  theme(axis.text=element_text(face="bold", size=12), 
+        plot.title = element_text(face="bold", size=22), 
+        axis.title = element_text(face="bold", size=14))
+```
+
+<img src="{{< blogdown/postref >}}index.en_files/figure-html/10: grafico para dos personas-1.png" width="672" />
+
+Para cinco este número baja a apenas más de 400:
+
+``` r
+completado5 %>% ggplot(aes(x=paquetes, y=prob_completar)) +
+  geom_point(alpha = 0.5, color="gray44", size=0.8) + theme_light() +
+  scale_x_continuous(breaks = seq(0, 2000, by=200)) +
+  scale_y_continuous(breaks = seq(0, 100, by=10), 
+                     labels=scales::label_number(accuracy=1, suffix="%")) +
+  labs(x="Cantidad de paquetes por persona", y="Probabilidad de completar los albumes", 
+       title = "Dos personas") +
+  theme(axis.text=element_text(face="bold", size=12), 
+        plot.title = element_text(face="bold", size=22), 
+        axis.title = element_text(face="bold", size=14))
+```
+
+<img src="{{< blogdown/postref >}}index.en_files/figure-html/11: grafico para 5 personas-1.png" width="672" />
+
+Y para diez es apenas más de 300:
+
+``` r
+completado10 %>% ggplot(aes(x=paquetes, y=prob_completar)) +
+  geom_point(alpha = 0.5, color="gray44", size=0.8) + theme_light() +
+  scale_x_continuous(breaks = seq(0, 2000, by=200)) +
+  scale_y_continuous(breaks = seq(0, 100, by=10), 
+                     labels=scales::label_number(accuracy=1, suffix="%")) +
+  labs(x="Cantidad de paquetes por persona", y="Probabilidad de completar los albumes", 
+       title = "Dos personas") +
+  theme(axis.text=element_text(face="bold", size=12), 
+        plot.title = element_text(face="bold", size=22), 
+        axis.title = element_text(face="bold", size=14))
+```
+
+<img src="{{< blogdown/postref >}}index.en_files/figure-html/12: grafico para 10 personas-1.png" width="672" />
+
+# Suponiendo independencia dentro de un mismo paquete
+
+Suponiendo que las figuritas pueden repetirse dentro de un mismo paquete, el ejercicio se simplifica bastante, aunque los resultados no sean muy distintos de los de arriba. Si cada figurita es independiente de las demás del mismo paquete, entonces el paquete deja de ser relevante a la hora de tomar la muestra de figuritas. Entonces, podemos simplemente, para cada nuúmero de personas y paquetes, tomar una muestra aleatoria con reemplazo de tantas figuritas como resulte del personas*paquetes*5, y calcular el éxito de la misma forma de arriba.
+
+``` r
+personas <- 1
+completado <- NULL
+simulaciones <- 200
+for(i in seq(1, 1600, by=2)){
+  exito <- NULL  
+  for(j in 1:simulaciones){
+  figus <-  as.data.frame(table(sample(1:638, i*personas*5, replace = TRUE)))
+  exito[j] <- ifelse(nrow(figus)==638 & min(figus$Freq)>=personas, TRUE, FALSE)}
+  simulacion <- data.frame(paquetes = i, prob_completar = sum(exito)/simulaciones*100)
+  completado <- rbind(completado, simulacion)}
+
+personas <- 2
+completado2 <- NULL
+simulaciones <- 200
+for(i in seq(1, 1600, by=2)){
+  exito <- NULL  
+  for(j in 1:simulaciones){
+  figus <-  as.data.frame(table(sample(1:638, i*personas*5, replace = TRUE)))
+  exito[j] <- ifelse(nrow(figus)==638 & min(figus$Freq)>=personas, TRUE, FALSE)}
+  simulacion <- data.frame(paquetes = i, prob_completar = sum(exito)/simulaciones*100)
+  completado2 <- rbind(completado2, simulacion)}
+
+personas <- 5
+completado5 <- NULL
+simulaciones <- 200
+for(i in seq(1, 1600, by=2)){
+  exito <- NULL  
+  for(j in 1:simulaciones){
+  figus <-  as.data.frame(table(sample(1:638, i*personas*5, replace = TRUE)))
+  exito[j] <- ifelse(nrow(figus)==638 & min(figus$Freq)>=personas, TRUE, FALSE)}
+  simulacion <- data.frame(paquetes = i, prob_completar = sum(exito)/simulaciones*100)
+  completado5 <- rbind(completado5, simulacion)}
+
+personas <- 10
+completado10 <- NULL
+simulaciones <- 200
+for(i in seq(1, 1600, by=2)){
+  exito <- NULL  
+  for(j in 1:simulaciones){
+  figus <-  as.data.frame(table(sample(1:638, i*personas*5, replace = TRUE)))
+  exito[j] <- ifelse(nrow(figus)==638 & min(figus$Freq)>=personas, TRUE, FALSE)}
+  simulacion <- data.frame(paquetes = i, prob_completar = sum(exito)/simulaciones*100)
+  completado10 <- rbind(completado10, simulacion)}
+```
+
+Abajo el gráfico para una persona. El 90% de probabilidad de completar el álbum se alcanza también cerca de los 1100 paquetes.
+
+``` r
+completado %>% ggplot(aes(x=paquetes, y=prob_completar)) +
+  geom_point(alpha = 0.5, color="gray44", size=0.8) + theme_light() +
+  scale_x_continuous(breaks = seq(0, 2000, by=200)) +
+  scale_y_continuous(breaks = seq(0, 100, by=10), 
+                     labels=scales::label_number(accuracy=1, suffix="%")) +
+  labs(x="Cantidad de paquetes", y="Probabilidad de completar el album", 
+       title = "Una sola persona (figuritas independientes)") +
+  theme(axis.text=element_text(face="bold", size=12), 
+        plot.title = element_text(face="bold", size=20), 
+        axis.title = element_text(face="bold", size=14))
+```
+
+<img src="{{< blogdown/postref >}}index.en_files/figure-html/14: grafico para simulacion completa para una persona con indep-1.png" width="672" />
+
+Abajo el gráfico para dos personas. El 90% de probabilidad de completar también se alcanza alrededor de los 700 paquetes.
+
+``` r
+completado2 %>% ggplot(aes(x=paquetes, y=prob_completar)) +
+  geom_point(alpha = 0.5, color="gray44", size=0.8) + theme_light() +
+  scale_x_continuous(breaks = seq(0, 2000, by=200)) +
+  scale_y_continuous(breaks = seq(0, 100, by=10), 
+                     labels=scales::label_number(accuracy=1, suffix="%")) +
+  labs(x="Cantidad de paquetes", y="Probabilidad de completar el album", 
+       title = "Dos personas (figuritas independientes)") +
+  theme(axis.text=element_text(face="bold", size=12), 
+        plot.title = element_text(face="bold", size=20), 
+        axis.title = element_text(face="bold", size=14))
+```
+
+<img src="{{< blogdown/postref >}}index.en_files/figure-html/15: grafico para simulacion completa para dos personas con indep-1.png" width="672" />
+
+Abajo el gráfico para cinco personas. El 90% de probabilidad de completar nuevamente se alcanza cerca de los 400 paquetes.
+
+``` r
+completado5 %>% ggplot(aes(x=paquetes, y=prob_completar)) +
+  geom_point(alpha = 0.5, color="gray44", size=0.8) + theme_light() +
+  scale_x_continuous(breaks = seq(0, 2000, by=200)) +
+  scale_y_continuous(breaks = seq(0, 100, by=10), 
+                     labels=scales::label_number(accuracy=1, suffix="%")) +
+  labs(x="Cantidad de paquetes", y="Probabilidad de completar el album", 
+       title = "Cinco personas (figuritas independientes)") +
+  theme(axis.text=element_text(face="bold", size=12), 
+        plot.title = element_text(face="bold", size=20), 
+        axis.title = element_text(face="bold", size=14))
+```
+
+<img src="{{< blogdown/postref >}}index.en_files/figure-html/16: grafico para simulacion completa para cinco personas con indep-1.png" width="672" />
+
+Por último, el gráfico para diez personas. Al igual que con figuritas no independientes, el 90% de probabilidad de completar el álbum se alcanza con cerca de 300 paquetes.
+
+``` r
+completado10 %>% ggplot(aes(x=paquetes, y=prob_completar)) +
+  geom_point(alpha = 0.5, color="gray44", size=0.8) + theme_light() +
+  scale_x_continuous(breaks = seq(0, 2000, by=200)) +
+  scale_y_continuous(breaks = seq(0, 100, by=10), 
+                     labels=scales::label_number(accuracy=1, suffix="%")) +
+  labs(x="Cantidad de paquetes", y="Probabilidad de completar el album", 
+       title = "Diez personas (figuritas independientes)") +
+  theme(axis.text=element_text(face="bold", size=12), 
+        plot.title = element_text(face="bold", size=20), 
+        axis.title = element_text(face="bold", size=14))
+```
+
+<img src="{{< blogdown/postref >}}index.en_files/figure-html/17: grafico para simulacion completa para diez personas con indep-1.png" width="672" />

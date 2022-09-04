@@ -79,3 +79,225 @@ El paso siguiente es hacer las simulaciones para distintas cantidades de paquete
 
 Como mencioné más arriba, primero haré las simulaciones suponiendo que no puede salir una misma figurita dos veces en un paquete, y luego suponiendo que cada figurita es independiente de las demás del paquete.
 
+# Suponiendo no independencia dentro del paquete
+
+Suponiendo que cada figurita no es independiente de las otras dentro de un mismo paquete, cada figurita es una selección aleatoria sin reemplazo del conjunto de 638 figuritas posibles con probabilidad distribuida uniformemente, defino dos funciones. A partir de este supuesto, defino dos funciones, `calcular_exito()` y `simular_paquete()`. `calcular_exito()` toma como argumento la cantidad de paquetes que se está simulando, que es el producto de la cantidad de personas participando y la cantidad de paquetes que cada una compra, genera una selección aleatoria de esa cantidad de figuritas, y verifica si se completó la cantidad buscada de álbumes, devolviendo. La función `simular_paquete()` toma como argumentos la cantidad de personas participando, las cantidades de paquetes que se quieren simular y la cantidad de simulaciones que se quiere correr para cada número de paquetes. Corre estas simulaciones usando `calcular_exito()` y para cada número de paquetes define la probabilidad de éxito como el porcentaje de simulaciones que devolvieron `TRUE` como resultado de `calcular_exito()` sobre el total de simulaciones ejecutadas.
+
+En este caso, empiezo corriendo 250 simulaciones por cada número de paquetes entre 1 y 1600 Para agilizar las simulaciones (que son bastante demandantes para la computadora), no simulo todos los números del intervalo sino solo los impares
+
+```{r 5: simulacion completa para una persona}
+calcular_exito <- function(packs){
+  figus<- as.data.frame(table(unlist(lapply(vector("list", packs), 
+   function(x) if (length(x) == 0) sample(1:638, 5, replace = FALSE) else x)))) 
+  return(ifelse(nrow(figus)==638 & min(figus$Freq)>=personas, TRUE, FALSE))}
+
+simular_paquete <- function(personas, paquetes, simulaciones){
+  packs <- personas*paquetes
+  resultado <- unlist(lapply(vector("list", simulaciones), function(x) if (length(x) == 0) calcular_exito(packs) else x))
+  resultado <- sum(resultado)/simulaciones*100
+  return(resultado)
+}
+
+personas=1
+simulaciones=250
+
+prob_completar <- unlist(lapply(seq(1, 1600, by=2), function(x) simular_paquete(personas=1, paquetes=x, simulaciones=250)))
+completado <- data.frame(paquetes = seq(1, 1600, by=2), prob_completar = prob_completar)
+```
+
+Con este objeto ya generado, se puede graficar la probabilidad de éxito con cada número de paquetes:
+
+```{r 6: grafico para simulacion completa para una persona}
+completado %>% ggplot(aes(x=paquetes, y=prob_completar)) +
+  geom_point(alpha = 0.5, color="gray44", size=0.8) + theme_light() +
+  scale_x_continuous(breaks = seq(0, 2000, by=200)) +
+  scale_y_continuous(breaks = seq(0, 100, by=10), 
+                     labels=scales::label_number(accuracy=1, suffix="%")) +
+  labs(x="Cantidad de paquetes", y="Probabilidad de completar el album", 
+       title = "Una sola persona") +
+  theme(axis.text=element_text(face="bold", size=12), 
+        plot.title = element_text(face="bold", size=22), 
+        axis.title = element_text(face="bold", size=14))
+```
+
+Se ve en el gráfico que se necesitan casi 1100 paquetes para llegar a una probabilidad de 90% de completar el álbum. Podemos repetir las simulaciones para 2, 5 y 10 personas:
+
+```{r  7: simulaciones completas para 2 personas}
+personas=2
+simulaciones=250
+
+prob_completar <- unlist(lapply(seq(1, 1600, by=2), function(x) simular_paquete(personas=2, paquetes=x, simulaciones=250)))
+completado2 <- data.frame(paquetes = seq(1, 1600, by=2), prob_completar = prob_completar)
+```
+
+```{r  8: simulaciones completas para 5 personas}
+personas=5
+simulaciones=250
+
+prob_completar <- unlist(lapply(seq(1, 1600, by=2), function(x) simular_paquete(personas=5, paquetes=x, simulaciones=250)))
+completado5 <- data.frame(paquetes = seq(1, 1600, by=2), prob_completar = prob_completar)
+```
+
+```{r  9: simulaciones completas para 10 personas}
+personas=10
+simulaciones=250
+
+prob_completar <- unlist(lapply(seq(1, 1600, by=2), function(x) simular_paquete(personas=10, paquetes=x, simulaciones=250)))
+completado10 <- data.frame(paquetes = seq(1, 1600, by=2), prob_completar = prob_completar)
+```
+
+El mismo gráfico de arriba para dos personas. Se ve que el número de paquetes en que la probabilidad de completar alcanza 90% baja a aproximadamente 700:
+
+```{r 10: grafico para dos personas}
+completado2 %>% ggplot(aes(x=paquetes, y=prob_completar)) +
+  geom_point(alpha = 0.5, color="gray44", size=0.8) + theme_light() +
+  scale_x_continuous(breaks = seq(0, 2000, by=200)) +
+  scale_y_continuous(breaks = seq(0, 100, by=10), 
+                     labels=scales::label_number(accuracy=1, suffix="%")) +
+  labs(x="Cantidad de paquetes por persona", y="Probabilidad de completar los albumes", 
+       title = "Dos personas") +
+  theme(axis.text=element_text(face="bold", size=12), 
+        plot.title = element_text(face="bold", size=22), 
+        axis.title = element_text(face="bold", size=14))
+```
+
+Para cinco este número baja a apenas más de 400: 
+
+```{r 11: grafico para 5 personas}
+completado5 %>% ggplot(aes(x=paquetes, y=prob_completar)) +
+  geom_point(alpha = 0.5, color="gray44", size=0.8) + theme_light() +
+  scale_x_continuous(breaks = seq(0, 2000, by=200)) +
+  scale_y_continuous(breaks = seq(0, 100, by=10), 
+                     labels=scales::label_number(accuracy=1, suffix="%")) +
+  labs(x="Cantidad de paquetes por persona", y="Probabilidad de completar los albumes", 
+       title = "Dos personas") +
+  theme(axis.text=element_text(face="bold", size=12), 
+        plot.title = element_text(face="bold", size=22), 
+        axis.title = element_text(face="bold", size=14))
+```
+
+Y para diez es apenas más de 300:
+
+```{r 12: grafico para 10 personas}
+completado10 %>% ggplot(aes(x=paquetes, y=prob_completar)) +
+  geom_point(alpha = 0.5, color="gray44", size=0.8) + theme_light() +
+  scale_x_continuous(breaks = seq(0, 2000, by=200)) +
+  scale_y_continuous(breaks = seq(0, 100, by=10), 
+                     labels=scales::label_number(accuracy=1, suffix="%")) +
+  labs(x="Cantidad de paquetes por persona", y="Probabilidad de completar los albumes", 
+       title = "Dos personas") +
+  theme(axis.text=element_text(face="bold", size=12), 
+        plot.title = element_text(face="bold", size=22), 
+        axis.title = element_text(face="bold", size=14))
+```
+
+# Suponiendo independencia dentro de un mismo paquete
+
+Suponiendo que las figuritas pueden repetirse dentro de un mismo paquete, el ejercicio se simplifica bastante, aunque los resultados no sean muy distintos de los de arriba. Si cada figurita es independiente de las demás del mismo paquete, entonces el paquete deja de ser relevante a la hora de tomar la muestra de figuritas. Entonces, podemos simplemente, para cada nuúmero de personas y paquetes, tomar una muestra aleatoria con reemplazo de tantas figuritas como resulte del personas*paquetes*5, y calcular el éxito de la misma forma de arriba.
+
+```{r 13: todas las simulaciones con independencia intra paquete}
+personas <- 1
+completado <- NULL
+simulaciones <- 200
+for(i in seq(1, 1600, by=2)){
+  exito <- NULL  
+  for(j in 1:simulaciones){
+  figus <-  as.data.frame(table(sample(1:638, i*personas*5, replace = TRUE)))
+  exito[j] <- ifelse(nrow(figus)==638 & min(figus$Freq)>=personas, TRUE, FALSE)}
+  simulacion <- data.frame(paquetes = i, prob_completar = sum(exito)/simulaciones*100)
+  completado <- rbind(completado, simulacion)}
+
+personas <- 2
+completado2 <- NULL
+simulaciones <- 200
+for(i in seq(1, 1600, by=2)){
+  exito <- NULL  
+  for(j in 1:simulaciones){
+  figus <-  as.data.frame(table(sample(1:638, i*personas*5, replace = TRUE)))
+  exito[j] <- ifelse(nrow(figus)==638 & min(figus$Freq)>=personas, TRUE, FALSE)}
+  simulacion <- data.frame(paquetes = i, prob_completar = sum(exito)/simulaciones*100)
+  completado2 <- rbind(completado2, simulacion)}
+
+personas <- 5
+completado5 <- NULL
+simulaciones <- 200
+for(i in seq(1, 1600, by=2)){
+  exito <- NULL  
+  for(j in 1:simulaciones){
+  figus <-  as.data.frame(table(sample(1:638, i*personas*5, replace = TRUE)))
+  exito[j] <- ifelse(nrow(figus)==638 & min(figus$Freq)>=personas, TRUE, FALSE)}
+  simulacion <- data.frame(paquetes = i, prob_completar = sum(exito)/simulaciones*100)
+  completado5 <- rbind(completado5, simulacion)}
+
+personas <- 10
+completado10 <- NULL
+simulaciones <- 200
+for(i in seq(1, 1600, by=2)){
+  exito <- NULL  
+  for(j in 1:simulaciones){
+  figus <-  as.data.frame(table(sample(1:638, i*personas*5, replace = TRUE)))
+  exito[j] <- ifelse(nrow(figus)==638 & min(figus$Freq)>=personas, TRUE, FALSE)}
+  simulacion <- data.frame(paquetes = i, prob_completar = sum(exito)/simulaciones*100)
+  completado10 <- rbind(completado10, simulacion)}
+```
+
+Abajo el gráfico para una persona. El 90% de probabilidad de completar el álbum se alcanza también cerca de los 1100 paquetes.
+
+```{r 14: grafico para simulacion completa para una persona con indep}
+completado %>% ggplot(aes(x=paquetes, y=prob_completar)) +
+  geom_point(alpha = 0.5, color="gray44", size=0.8) + theme_light() +
+  scale_x_continuous(breaks = seq(0, 2000, by=200)) +
+  scale_y_continuous(breaks = seq(0, 100, by=10), 
+                     labels=scales::label_number(accuracy=1, suffix="%")) +
+  labs(x="Cantidad de paquetes", y="Probabilidad de completar el album", 
+       title = "Una sola persona (figuritas independientes)") +
+  theme(axis.text=element_text(face="bold", size=12), 
+        plot.title = element_text(face="bold", size=20), 
+        axis.title = element_text(face="bold", size=14))
+```
+
+Abajo el gráfico para dos personas. El 90% de probabilidad de completar también se alcanza alrededor de los 700 paquetes.
+
+```{r 15: grafico para simulacion completa para dos personas con indep}
+completado2 %>% ggplot(aes(x=paquetes, y=prob_completar)) +
+  geom_point(alpha = 0.5, color="gray44", size=0.8) + theme_light() +
+  scale_x_continuous(breaks = seq(0, 2000, by=200)) +
+  scale_y_continuous(breaks = seq(0, 100, by=10), 
+                     labels=scales::label_number(accuracy=1, suffix="%")) +
+  labs(x="Cantidad de paquetes", y="Probabilidad de completar el album", 
+       title = "Dos personas (figuritas independientes)") +
+  theme(axis.text=element_text(face="bold", size=12), 
+        plot.title = element_text(face="bold", size=20), 
+        axis.title = element_text(face="bold", size=14))
+```
+
+Abajo el gráfico para cinco personas. El 90% de probabilidad de completar nuevamente se alcanza cerca de los 400 paquetes.
+
+```{r 16: grafico para simulacion completa para cinco personas con indep}
+completado5 %>% ggplot(aes(x=paquetes, y=prob_completar)) +
+  geom_point(alpha = 0.5, color="gray44", size=0.8) + theme_light() +
+  scale_x_continuous(breaks = seq(0, 2000, by=200)) +
+  scale_y_continuous(breaks = seq(0, 100, by=10), 
+                     labels=scales::label_number(accuracy=1, suffix="%")) +
+  labs(x="Cantidad de paquetes", y="Probabilidad de completar el album", 
+       title = "Cinco personas (figuritas independientes)") +
+  theme(axis.text=element_text(face="bold", size=12), 
+        plot.title = element_text(face="bold", size=20), 
+        axis.title = element_text(face="bold", size=14))
+```
+
+Por último, el gráfico para diez personas. Al igual que con figuritas no independientes, el 90% de probabilidad de completar el álbum se alcanza con cerca de 300 paquetes.
+
+```{r 17: grafico para simulacion completa para diez personas con indep}
+completado10 %>% ggplot(aes(x=paquetes, y=prob_completar)) +
+  geom_point(alpha = 0.5, color="gray44", size=0.8) + theme_light() +
+  scale_x_continuous(breaks = seq(0, 2000, by=200)) +
+  scale_y_continuous(breaks = seq(0, 100, by=10), 
+                     labels=scales::label_number(accuracy=1, suffix="%")) +
+  labs(x="Cantidad de paquetes", y="Probabilidad de completar el album", 
+       title = "Diez personas (figuritas independientes)") +
+  theme(axis.text=element_text(face="bold", size=12), 
+        plot.title = element_text(face="bold", size=20), 
+        axis.title = element_text(face="bold", size=14))
+```
+
