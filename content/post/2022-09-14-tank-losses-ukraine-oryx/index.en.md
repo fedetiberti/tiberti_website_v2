@@ -23,7 +23,9 @@ lapply(c("tidyverse", "janitor",
 initial_date <- ymd("2022-02-24")
 last_date <- today() - days(1)
 
-data_oryx <- paste0("https://raw.githubusercontent.com/leedrake5/Russia-Ukraine/main/data/byType/", seq(initial_date, last_date, by="days"), ".csv") %>% 
+data_oryx <- paste0(
+"https://raw.githubusercontent.com/leedrake5/Russia-Ukraine/main/data/byType/", 
+seq(initial_date, last_date, by="days"), ".csv") %>% 
   lapply(read_csv) %>% 
   bind_rows() %>% clean_names()
 ```
@@ -48,8 +50,9 @@ data_oryx %>%
   scale_x_date(breaks="1 month", date_labels="%b %Y")+
   geom_flag(aes(x=maxdate, y=lost_maxdate, country=code)) +
   theme_light() +
-  labs(x="", y="", title="Tanks lost by Russia and Ukraine since the 2022 Russian Invasion", 
-       caption = "Source: Visually confirmed equipment losses documented by Oryx Project") +
+  labs(x="", y="", 
+  title="Tanks lost by Russia and Ukraine since the 2022 Russian Invasion", 
+  caption = "Source: Visually confirmed equipment losses documented by Oryx Project") +
   theme(axis.text = element_text(face="bold"), 
         plot.title=element_text(face="bold"))
 ```
