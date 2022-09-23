@@ -22,7 +22,7 @@ Si bien es posible que sea un caso de éxito en la gestión de la pandemia y que
 
 <img src="{{< blogdown/postref >}}index.en_files/figure-html/unnamed-chunk-2-1.png" width="672" />
 
-Encontramos un desvīo similar mirando otro dato publicado durante la pandemia: el número de beneficiarios del Ingreso Familiar de Emergencia (IFE) por municipio. Cruzando beneficiarios de IFE cada 100 habitantes con la tasa de pobreza crónica por municipio, se ve una relación positiva. Previsiblemente, municipios con mayor pobreza crónica tuvieron un mayor porcentaje de su población como beneficiarios de IFE que municipios de baja pobreza. La Matanza, sin embargo, se desvía mucho en esa relación, con un porcentaje de población beneficiaria de IFE similar al de municipios de mucho menor pobreza crónica, como Morón o San Isidro.
+Encontramos un desvío similar mirando otro dato publicado durante la pandemia: el número de beneficiarios del Ingreso Familiar de Emergencia (IFE) por municipio. Cruzando beneficiarios de IFE cada 100 habitantes con la tasa de pobreza crónica por municipio, se ve una relación positiva. Previsiblemente, municipios con mayor pobreza crónica tuvieron un mayor porcentaje de su población como beneficiarios de IFE que municipios de baja pobreza. La Matanza, sin embargo, se desvía mucho en esa relación, con un porcentaje de población beneficiaria de IFE similar al de municipios de mucho menor pobreza crónica, como Morón o San Isidro.
 
 
 <img src="{{< blogdown/postref >}}index.en_files/figure-html/unnamed-chunk-3-1.png" width="672" />
