@@ -10,11 +10,9 @@ image:
   preview_only: yes
 tags:
 - La Matanza
-- plot
-- regression
 ---
 
-Este post sintetiza algunos datos que compartimos con [Mauro Infantino](www.covidstats.com.ar) en una serie de hilos de Twitter ([este](https://twitter.com/plenque/status/1508414515372822535), [este](https://twitter.com/plenque/status/1513576305295564800) y [este](https://twitter.com/plenque/status/1526702449897111553?s=20&t=kP5nU-dn_pTOI_RABfwZfQ)) Desde que le dedicamos algo de tiempo a mirar las estadísticas de la pandemia, los resultados de La Matanza nos resultaron llamativos. La mortalidad por covid-19 en La Matanza, estandarizada por edades (es decir, ajustada para tener en cuenta las diferencias en la composición etaria por departamento en el último censo), es baja comparada con municipios de nivel de pobreza similar.
+Este post sintetiza algunos datos que compartimos con [Mauro Infantino](https://covidstats.com.ar/panorama) en una serie de hilos de Twitter ([este](https://twitter.com/plenque/status/1508414515372822535), [este](https://twitter.com/plenque/status/1513576305295564800) y [este](https://twitter.com/plenque/status/1526702449897111553?s=20&t=kP5nU-dn_pTOI_RABfwZfQ)) Desde que le dedicamos algo de tiempo a mirar las estadísticas de la pandemia, los resultados de La Matanza nos resultaron llamativos. La mortalidad por covid-19 en La Matanza, estandarizada por edades (es decir, ajustada para tener en cuenta las diferencias en la composición etaria por departamento en el último censo), es baja comparada con municipios de nivel de pobreza similar.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 library(tidyverse)
