@@ -1,0 +1,385 @@
+---
+title: "¿Está sobreestimada la población de La Matanza?"
+author: "Federico Tiberti"
+date: '2022-04-22'
+slug: poblacion-la-matanza
+categories: R
+image:
+  caption: ''
+  focal_point: ''
+  preview_only: yes
+tags:
+- La Matanza
+- plot
+- regression
+---
+
+Este post sintetiza algunos datos que compartimos con [Mauro Infantino](www.covidstats.com.ar) en una serie de hilos de Twitter ([este](https://twitter.com/plenque/status/1508414515372822535), [este](https://twitter.com/plenque/status/1513576305295564800) y [este](https://twitter.com/plenque/status/1526702449897111553?s=20&t=kP5nU-dn_pTOI_RABfwZfQ)) Desde que le dedicamos algo de tiempo a mirar las estadísticas de la pandemia, los resultados de La Matanza nos resultaron llamativos. La mortalidad por covid-19 en La Matanza, estandarizada por edades (es decir, ajustada para tener en cuenta las diferencias en la composición etaria por departamento en el último censo), es baja comparada con municipios de nivel de pobreza similar.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+source("generar_datos.R")
+
+mortalidad_vacunacion %>% 
+  mutate(matanza = ifelse(departamento == "La Matanza", "1", "0")) %>% 
+  ggplot(aes(x=pobcronica, y=mortalidad_estandarizada)) + 
+  geom_point(aes(color=matanza, size=matanza),show.legend=FALSE) +
+  scale_x_continuous(labels=scales::label_number(suffix="%"), breaks=seq(0, 20, by=5))+
+  scale_size_manual(breaks=c("0","1"), values=c(1, 3)) +
+  scale_color_manual(breaks=c("0","1"), values=c("gray66", "steelblue3")) +
+  ggrepel::geom_text_repel(data= mortalidad_vacunacion %>% filter(departamento=="La Matanza"),
+                           aes(label=departamento), size=5)+
+  ggrepel::geom_text_repel(data= mortalidad_vacunacion %>% filter(departamento!="La Matanza"),
+                           aes(label=departamento), size=2)+
+  theme_classic() +
+  labs(x="Tasa de pobreza crónica", y="Mortalidad por covid-19, estandarizada por edades", 
+    caption =  "Gráfico: Mauro Infantino y Federico Tiberti. El dato de mortalidad proviene
+                del Ministerio de Salud. La estandarización por edades está hecha de acuerdo con
+                el censo de 2010 y la estimación de pobreza crónica 
+                para el año 2017 es de Gasparini, Gluzmann y Tornarolli (2019).") +
+  theme(axis.text = element_text(face="bold", size=8), 
+        axis.title = element_text(face= "bold", size=12), 
+        plot.caption = element_text(size=6),
+        plot.title = element_text(size=18, face="bold"))
+
+```
+
+
+Si bien es posible que sea un caso de éxito en la gestión de la pandemia y que eso explique la divergencia positiva que muestra en mortalidad respecto de partidos de nivel socioeconómico similar, cuando a los datos de casos y fallecimientos se sumaron los datos de vacunación, la divergencia de La Matanza se hizo más llamativa. La vacunación llegó a cubrir a un porcentaje de la población muy bajo en comparación con municipios vecinos.
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+mortalidad_vacunacion %>% 
+  mutate(matanza = ifelse(departamento == "La Matanza", "1", "0")) %>% 
+  ggplot(aes(x=mortalidad_estandarizada, y=esquema_completo_pct)) + 
+  geom_point(aes(color=matanza, size=matanza),show.legend=FALSE) +
+  scale_size_manual(breaks=c("0","1"), values=c(1, 3)) +
+  scale_color_manual(breaks=c("0","1"), values=c("gray66", "steelblue3")) +
+  ggrepel::geom_text_repel(data= mortalidad_vacunacion %>% filter(departamento=="La Matanza"),
+                           aes(label=departamento), size=5)+
+  ggrepel::geom_text_repel(data= mortalidad_vacunacion %>% filter(departamento!="La Matanza"),
+                           aes(label=departamento), size=2)+
+  theme_classic() +
+  labs(x="Tasa de pobreza crónica", y="% de la población (2010) con vacunación completa") +
+  theme(axis.text = element_text(face="bold", size=8), 
+        axis.title = element_text(face= "bold", size=12), 
+        plot.caption = element_text(size=6),
+        plot.title = element_text(size=18, face="bold"))
+
+```
+
+Encontramos un desvīo similar mirando otro dato publicado durante la pandemia: el número de beneficiarios del Ingreso Familiar de Emergencia (IFE) por municipio. Cruzando beneficiarios de IFE cada 100 habitantes con la tasa de pobreza crónica por municipio, se ve una relación positiva. Previsiblemente, municipios con mayor pobreza crónica tuvieron un mayor porcentaje de su población como beneficiarios de IFE que municipios de baja pobreza. La Matanza, sin embargo, se desvía mucho en esa relación, con un porcentaje de población beneficiaria de IFE similar al de municipios de mucho menor pobreza crónica, como Morón o San Isidro.
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+ife %>% 
+  filter(iddepartamento %in% gba) %>% 
+  mutate(ife_percap = cantidad_ife/personas*100, 
+         matanza = ifelse(denominacion == "La Matanza", "1", "0")) %>% 
+  ggplot(aes(x=pobreza_cronica, y=ife_percap, color=matanza, size=matanza)) +
+  geom_point(show.legend = FALSE) +
+  scale_x_continuous(labels=scales::label_number(suffix="%", accuracy = 1)) +
+  scale_color_manual(breaks=c("0","1"), values=c("gray66", "steelblue3")) +
+  scale_size_manual(breaks=c("0","1"), values=c(1, 4)) +
+  ggrepel::geom_text_repel(data = ife %>% filter(iddepartamento %in% gba & denominacion != "La Matanza"),
+     aes(label = denominacion, x=pobreza_cronica, y=cantidad_ife/personas*100), inherit.aes = FALSE, size=2) +
+  geom_text(data= ife %>% filter(denominacion == "La Matanza"),
+            aes(label = denominacion, y=cantidad_ife/personas*100), x=12.1, size=5, inherit.aes = FALSE) +
+  theme_classic() +
+  labs(x="Tasa de pobreza crónica", y="Asignaciones de IFE cada 100 habitantes estimados, 2020", 
+       caption = "Gráfico: Mauro Infantino y Federico Tiberti. El dato de asignaciones IFE proviene de ANSES, 
+                  la estimación de población para 2020 es de INDEC y la estimación de pobreza crónica 
+                  para el año 2017 es de Gasparini, Gluzmann y Tornarolli (2019).") +
+  theme(axis.text = element_text(face="bold", size=8), 
+        axis.title = element_text(face= "bold", size=12), 
+        plot.caption = element_text(size=6)) 
+
+```
+
+Ante la anomalía de La Matanza, que muestra baja mortalidad como porcentaje de la población, bajo nivel de vacunación como porcentaje de la población y bajo número de beneficiarios de IFE como porcentaje de la población para lo que es su nivel de pobreza, se nos ocurrió mirar si el problema, en vez de en los datos de la pandemia que se usan como numerador en estas proporciones, estaba en realidad en el denominador: el dato de población.
+
+Para los años en que hay censos, el dato de población es el que surge de ellos. Para los demás, se usan las proyecciones de población que hace INDEC. La población proyectada de cada partido se calcula con base en el censo previo incorporando datos estimados (natalidad, mortalidad, migraciones) para cada año. Entonces, por ejemplo, el censo 2010 dio origen a las proyecciones hasta 2019. Ya con eso vimos un salto particular en 2010.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+resultados %>% na.omit() %>% 
+  filter(year>1993) %>% 
+  mutate(proporcion = electores/pob*100, 
+         matanza = ifelse(partido == "La Matanza", "1", "0")) %>% 
+  group_by(partido) %>% 
+  mutate(maxyear = 2019,
+         maxvalue = proporcion[year==maxyear]) %>% 
+  filter(partido == "La Matanza") %>% 
+  ggplot(aes(x=year, y=pob)) +
+  geom_line(show.legend = FALSE, color= "steelblue3", size=1.2) +
+  geom_text(data=resultados %>% filter(year == 2019 & partido == "La Matanza"), aes(label = partido, y=pob), x=2020.5, size=4) +
+  expand_limits(x = 2021)+
+ theme_classic() +
+  scale_x_continuous(breaks=seq(1995,2019,by=2))+
+  scale_y_continuous(labels = scales::label_number(big.mark=".", decimal.mark = ","))+
+  labs(x="Año", y="Población estimada por la proyección más reciente", 
+       caption = "Gráfico: Mauro Infantino y Federico Tiberti. El dato de población de cada año es el de la proyección de INDEC más reciente. 
+        Para el periodo 1995-2000: https://biblioteca.indec.gob.ar/bases/minde/4si20_8.pdf. 2001-2009: https://biblioteca.indec.gob.ar/bases/minde/4si20_34.pdf.
+                  2011-2019: https://www.indec.gob.ar/indec/web/Nivel4-Tema-2-24-119.") +
+  theme(axis.text = element_text(face="bold", size=8), 
+        axis.title = element_text(face= "bold", size=12), 
+        plot.caption = element_text(size=6))
+```
+
+
+Para comprobar la verosimilitud de estos saltos en el ritmo de crecimiento de la población de La Matanza, se nos ocurrió mirar otros datos, no generados por los censos de INDEC ni las proyecciones resultantes de ellos, pero que deberían estar fuertemente correlacionados con la cantidad de habitantes. El primero que miramos fue el número de electores habilitados para votar en cada elección. Este dato se genera a partir de los padrones de la Cámara Nacional Electoral y son independientes de la información censal. A diferencia del dato de población que surge de los censos, la evolución del número de electores en La Matanza muestra un aumento más suave, sin saltos bruscos.
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+resultados %>% na.omit() %>% 
+  filter(year>1993) %>% 
+  mutate(proporcion = electores/pob*100, 
+         matanza = ifelse(partido == "La Matanza", "1", "0")) %>% 
+  group_by(partido) %>% 
+  mutate(maxyear = 2019,
+         maxvalue = proporcion[year==maxyear]) %>% 
+  filter(partido == "La Matanza") %>% 
+  ggplot(aes(x=year, y=electores)) +
+  geom_line(show.legend = FALSE, color= "steelblue3", size=1.2) +
+  geom_text(data=resultados %>% filter(year == 2019 & partido == "La Matanza"), aes(label = partido, y=electores), x=2020.5, size=4) +
+  expand_limits(x = 2021)+
+  theme_classic() +
+  scale_x_continuous(breaks=seq(1995,2019,by=2))+
+  scale_y_continuous(labels = scales::label_number(big.mark=".", decimal.mark = ","))+
+  labs(x="Año", y="Electores habilitados para la elección municipal general", 
+       caption = "Gráfico: Mauro Infantino y Federico Tiberti. Fuente: Atlas Electoral de Andy Tow.") +
+  theme(axis.text = element_text(face="bold", size=8), 
+        axis.title = element_text(face= "bold", size=12), 
+        plot.caption = element_text(size=6))
+```
+
+
+Esto nos llevó a pensar en una relación entre ambas variables, y mirar cómo cambia con el tiempo el nuu4úmero de electores cada 100 habitantes. Como se trata de una población que "envejece", y hubo además una reforma electoral amplió el derecho al voto para incluir a los mayores de 16 años, es esperable que los electores cada vez representen un porcentaje mayor de la población. Sin embargo, en el año 2010 se produce un quiebre importante a la baja, por el salto en la población estimada a partir del censo de ese año que mostramos más arriba.
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+resultados %>% na.omit() %>% 
+  filter(year>1993) %>% 
+  mutate(proporcion = electores/pob*100, 
+         matanza = ifelse(partido == "La Matanza", "1", "0")) %>% 
+  group_by(partido) %>% 
+  mutate(maxyear = 2019,
+         maxvalue = proporcion[year==maxyear]) %>% 
+  filter(partido == "La Matanza") %>% 
+  ggplot(aes(x=year, y=proporcion)) +
+  geom_line(show.legend = FALSE, color= "steelblue3", size=1.2) +
+  geom_text(data=resultados %>% filter(year == 2019 & partido == "La Matanza") %>% 
+              mutate(proporcion = electores/pob*100), aes(label = partido, y=proporcion), x=2020.5, size=4) +
+  expand_limits(x = 2021)+
+  theme_classic() +
+  scale_x_continuous(breaks=seq(1995,2019,by=2))+
+  scale_y_continuous(labels = scales::label_number(big.mark=".", decimal.mark = ","))+
+  labs(x="Año", y="Electores habilitados cada 100 habitantes estimados", 
+       caption = "Gráfico: Mauro Infantino y Federico Tiberti. El dato de población de cada año es el de la proyección de INDEC más reciente. 
+        Para el periodo 1995-2000: https://biblioteca.indec.gob.ar/bases/minde/4si20_8.pdf. 2001-2009: https://biblioteca.indec.gob.ar/bases/minde/4si20_34.pdf.
+                  2011-2019: https://www.indec.gob.ar/indec/web/Nivel4-Tema-2-24-119. El dato de electores es el del total
+                  de electores habilitados para las elecciones generales de cada año. Fuente: Atlas Electoral de Andy Tow.") +
+  theme(axis.text = element_text(face="bold", size=8), 
+        axis.title = element_text(face= "bold", size=12), 
+        plot.caption = element_text(size=6)) 
+```
+
+Para ver si ese salto brusco era común a todos los partidos tras el censo de 2010 o el resultado de algo específico del partido de La Matanza, incluimos en el gráfico al resto de los municipios del conurbano. Se ve que la anomalía es exclusiva de La Matanza: el ratio de electores cada 100 habitantes mantiene su crecimiento suave en todos los municipios en 2010, pero en La Matanza cae bruscamente y se mantiene muy bajo a partir de ese año. Si bien hay algunos cambios mínimos de tendencia temporales en otros partidos, ninguno presenta una irregularidad tan marcada como La Matanza.
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+resultados %>% na.omit() %>% 
+  filter(year>1993) %>% 
+  mutate(proporcion = electores/pob*100, 
+         matanza = ifelse(partido == "La Matanza", "1", "0")) %>% 
+  group_by(partido) %>% 
+  mutate(maxyear = 2019,
+         maxvalue = proporcion[year==maxyear]) %>% 
+  ggplot(aes(x=year, y=proporcion, group=partido, color=matanza, size=matanza, alpha=matanza)) +
+  geom_line(show.legend = FALSE) +
+  scale_color_manual(breaks=c("0","1"), values=c("gray66", "steelblue3")) +
+  scale_alpha_manual(breaks=c("0","1"), values=c(0.4, 1)) +
+   scale_size_manual(breaks=c("0","1"), values=c(0.8, 1.2)) +
+  expand_limits(x = 2021)+
+ ggrepel::geom_text_repel(data = resultados %>% filter(year==2019 & partido != "La Matanza"),
+    aes(label = partido, x=year, y=electores/pob*100, size=matanza),nudge_x = 1, inherit.aes = FALSE, size=1.5) +
+ geom_text(data= resultados %>% filter(year==2019 & partido == "La Matanza"),
+           aes(label = partido, y=electores/pob*100), x=2020.5, size=4, inherit.aes = FALSE) +
+  theme_classic() +
+  scale_x_continuous(breaks=seq(1995,2019,by=2))+
+  labs(x="Año", y="Electores habilitados cada 100 habitantes estimados", 
+       caption = "Gráfico: Mauro Infantino y Federico Tiberti. El dato de población de cada año es el de la proyección de INDEC más reciente. 
+        Para el periodo 1995-2000: https://biblioteca.indec.gob.ar/bases/minde/4si20_8.pdf. 2001-2009: https://biblioteca.indec.gob.ar/bases/minde/4si20_34.pdf.
+                  2011-2019: https://www.indec.gob.ar/indec/web/Nivel4-Tema-2-24-119. El dato de electores es el del total
+                  de electores habilitados para las elecciones generales de cada año. Fuente: Atlas Electoral de Andy Tow.") +
+  theme(axis.text = element_text(face="bold", size=8), 
+        axis.title = element_text(face= "bold", size=12), 
+        plot.caption = element_text(size=6)) 
+```
+
+Entonces: La Matanza muestra un ratio de electores habilitados cada 100 habitantes en línea con el resto de los municipios del conurbano hasta el año 2010, cuando su ratio cae bruscamente y se aleja de los demás partidos. Si bien esto es consistente con que la población de La Matanza haya sido sobreestimada en el censo 2010 y, en consecuencia, haya permanecido sobreestimada desde entonces, también es teóricamente posible pensar en algún shock demográfico que haya sucedido *únicamente en La Matanza* en 2010, incrementando en un salto discreto la proporción de población no habilitada para votar, por ejemplo, menores de 16 años. En definitiva, los electores habilitados para votar registran a la población adulta, y por eso tienden a subir como proporción de la población cuando esta envejece. Si hubiera habido, *solo en el año 2010 y solo en La Matanza*, un salto muy grande en la proporción de población menor de edad, eso explicaría el resultado anómalo que se ve en el gráfico de arriba.
+
+Para ver si ese era el caso, buscamos otro dato, cuya evolución también debería acompañar a la de la población en general, pero que captura principalmente a la franja menor de edad: la matrícula escolar de los niveles inicial, primario y secundario. Como se ve en el gráfico de abajo, la matrícula en La Matanza crece a partir del año 2012, pero sin ningún salto discreto notable en ningún año.
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+resultados2 <- poblacion %>% 
+  left_join(matricula, by=c("partido", "year"))%>% 
+  mutate(alumnos_pob = alumnos/pob*100) %>% 
+  left_join(resultados %>% select(-pob), by=c("partido", "year")) %>% 
+  mutate(electores_pob = alumnos/pob*100)
+
+
+electores2011 <- resultados2 %>% mutate(electores_pob = electores/pob*100) %>% 
+  filter(year==2011) %>% select(partido, electores_pob)
+
+matricula2010 <- resultados2 %>% mutate(matricula_pob = alumnos/pob*100) %>% 
+  filter(year==2010) %>% select(partido, matricula_pob)
+
+resultados2 %>% 
+  group_by(partido) %>% 
+  mutate(maxyear = 2020,
+         maxvalue = alumnos[year==maxyear],
+         matanza = ifelse(partido == "La Matanza", "1", "0")) %>% 
+  filter(partido == "La Matanza" & year>2004) %>% 
+  ggplot(aes(x=year, y=alumnos, group=partido, color=matanza, size=matanza, alpha=matanza)) +
+  geom_line(show.legend = FALSE) +
+  scale_color_manual(breaks=c("0","1"), values=c("gray66", "steelblue3")) +
+  scale_alpha_manual(breaks=c("0","1"), values=c(0.4, 1)) +
+  scale_size_manual(breaks=c("0","1"), values=c(0.8, 1.2)) +
+  expand_limits(x = 2022)+
+  geom_text(data= resultados2 %>% filter(year==2020 & partido == "La Matanza"),
+            aes(label = partido, y=alumnos), x=2021, size=4, inherit.aes = FALSE) +
+  theme_classic() +
+  scale_x_continuous(breaks=seq(2006,2020,by=2))+
+  scale_y_continuous(limits=c(300000,380000), labels=scales::label_number(big.mark = "."))+
+  labs(x="Año", y="Matrícula escolar", 
+       caption = "Gráfico: Mauro Infantino y Federico Tiberti. El dato de matrícula escolar proviene de 
+                  la Dirección General de Cultura y Educación del Gobierno de la Provincia de Buenos Aires.") +
+  theme(axis.text = element_text(face="bold", size=8), 
+        axis.title = element_text(face= "bold", size=12), 
+        plot.caption = element_text(size=6))
+```
+
+Como hicimos antes con el dato de electores, pasamos a calcular alumnos matriculados como proporción de la población. Al igual que con los electores registrados, se produce una caída muy fuerte en alumnos matriculados a partir del año 2010.
+
+ 
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+resultados2 %>% 
+group_by(partido) %>% 
+  mutate(maxyear = 2020,
+         maxvalue = alumnos_pob[year==maxyear],
+         matanza = ifelse(partido == "La Matanza", "1", "0")) %>% 
+  filter(partido == "La Matanza" & year>2004) %>% 
+  ggplot(aes(x=year, y=alumnos_pob, group=partido, color=matanza, size=matanza, alpha=matanza)) +
+  geom_line(show.legend = FALSE) +
+  scale_color_manual(breaks=c("0","1"), values=c("gray66", "steelblue3")) +
+  scale_alpha_manual(breaks=c("0","1"), values=c(0.4, 1)) +
+  scale_size_manual(breaks=c("0","1"), values=c(0.8, 1.2)) +
+  expand_limits(x = 2022)+
+ geom_text(data= resultados2 %>% filter(year==2020 & partido == "La Matanza"),
+            aes(label = partido, y=alumnos/pob*100), x=2021, size=4, inherit.aes = FALSE) +
+  theme_classic() +
+  scale_x_continuous(breaks=seq(2006,2020,by=2))+
+  labs(x="Año", y="Matrícula escolar cada 100 habitantes estimados", 
+       caption = "Gráfico: Mauro Infantino y Federico Tiberti. El dato de población de cada año es el de la proyección de INDEC más reciente. 
+        Para el periodo 1995-2000: https://biblioteca.indec.gob.ar/bases/minde/4si20_8.pdf. 2001-2009: https://biblioteca.indec.gob.ar/bases/minde/4si20_34.pdf.
+                  2011-2019: https://www.indec.gob.ar/indec/web/Nivel4-Tema-2-24-119. El dato de matrícula escolar proviene de 
+                  la Dirección General de Cultura y Educación del Gobierno de la Provincia de Buenos Aires.") +
+  theme(axis.text = element_text(face="bold", size=8), 
+        axis.title = element_text(face= "bold", size=12), 
+        plot.caption = element_text(size=6))
+```
+
+Esto no ocurre del mismo modo en otros partidos del conurbano, que solo muestran cambios suaves antes y después del año 2010.
+ 
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+resultados2 %>% 
+group_by(partido) %>% 
+  mutate(maxyear = 2020,
+         maxvalue = alumnos_pob[year==maxyear],
+         matanza = ifelse(partido == "La Matanza", "1", "0")) %>% 
+  filter(year>2004) %>% 
+  ggplot(aes(x=year, y=alumnos_pob, group=partido, color=matanza, size=matanza, alpha=matanza)) +
+  geom_line(show.legend = FALSE) +
+  scale_color_manual(breaks=c("0","1"), values=c("gray66", "steelblue3")) +
+  scale_alpha_manual(breaks=c("0","1"), values=c(0.4, 1)) +
+  scale_size_manual(breaks=c("0","1"), values=c(0.8, 1.2)) +
+  expand_limits(x = 2022)+
+  ggrepel::geom_text_repel(data = resultados2 %>% filter(year==2020 & partido != "La Matanza"),
+         aes(label = partido, x=year, y=alumnos/pob*100, size=matanza),nudge_x = 1, inherit.aes = FALSE, size=1.5) +
+  geom_text(data= resultados2 %>% filter(year==2020 & partido == "La Matanza"),
+            aes(label = partido, y=alumnos/pob*100), x=2021, size=4, inherit.aes = FALSE) +
+  theme_classic() +
+  scale_x_continuous(breaks=seq(2006,2020,by=2))+
+  labs(x="Año", y="Matrícula escolar cada 100 habitantes estimados", 
+       caption = "Gráfico: Mauro Infantino y Federico Tiberti. El dato de población de cada año es el de la proyección de INDEC más reciente. 
+        Para el periodo 1995-2000: https://biblioteca.indec.gob.ar/bases/minde/4si20_8.pdf. 2001-2009: https://biblioteca.indec.gob.ar/bases/minde/4si20_34.pdf.
+                  2011-2019: https://www.indec.gob.ar/indec/web/Nivel4-Tema-2-24-119. El dato de matrícula escolar proviene de 
+                  la Dirección General de Cultura y Educación del Gobierno de la Provincia de Buenos Aires.") +
+  theme(axis.text = element_text(face="bold", size=8), 
+        axis.title = element_text(face= "bold", size=12), 
+        plot.caption = element_text(size=6))
+
+```
+ 
+ Al igual que con los electores registrados, La Matanza muestra una caída brusca en la matrícula escolar a partir de 2010, que no se replica en ningún otro partido. Esto es un resultado particularmente llamativo si se toma en cuenta el anterior. Si la explicación alternativa a una sobreestimación de la población era que hubiera habido un salto discreto en la población menor de edad en La Matanza en 2010, la explicación alternativa a que haya habido un salto discreto en la población mirando los datos de matrícula escolar es que haya habido un salto discreto en la población adulta. El súbito aparente crecimiento poblacional de La Matanza en 2010 no estuvo acompñado por un aumento semejante ni en alumnos de escuela ni en votantes en elecciones. Se llenó de población ni adulta ni joven. O, lo que suena más probable, se sobreestimó la población en 2010, y tanto electores cada 100 habitantes como alumnos cada 100 habitantes quedaron artificialmente subestimados. 
+ 
+ De hecho, si uno cruza estos dos indicadores para los dos años más cercanos al censo que están disponibles, la mayoría de los municipios muestran una relación negativa. Es intuitivo: municipios con población más envejecida, como Vicente López, tienen muchos electores habilitados cada 100 habitantes, pero pocos alumnos matriculados. Del otro lado, municipios con población muy joven, como Presidente Perón, tienen muchos alumnos cada 100 habitantes, pero pocos electores. La Matanza, sin embargo, se destaca por tener el menor número, tanto de electores como de alumnos matriculados cada 100 habitantes. Tiene, al mismo tiempo, la población más joven y más envejecida. O, más probablemente, un número de población sobreestimado.
+ 
+ 
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+
+
+resultados2 <- poblacion %>% 
+  left_join(matricula, by=c("partido", "year"))%>% 
+  mutate(alumnos_pob = alumnos/pob*100) %>% 
+  left_join(resultados %>% select(-pob), by=c("partido", "year")) %>% 
+  mutate(electores_pob = alumnos/pob*100)
+
+
+electores2011 <- resultados2 %>% mutate(electores_pob = electores/pob*100) %>% 
+  filter(year==2011) %>% select(partido, electores_pob)
+
+matricula2010 <- resultados2 %>% mutate(matricula_pob = alumnos/pob*100) %>% 
+  filter(year==2010) %>% select(partido, matricula_pob)
+
+electores2011 %>% left_join(matricula2010) %>% 
+  mutate(matanza = ifelse(partido == "La Matanza", "1", "0")) %>% 
+  ggplot(aes(x=electores_pob, y=matricula_pob)) + 
+  geom_point(aes(color=matanza, size=matanza),show.legend=FALSE) +
+  scale_size_manual(breaks=c("0","1"), values=c(1, 3)) +
+  scale_color_manual(breaks=c("0","1"), values=c("gray66", "steelblue3")) +
+  ggrepel::geom_text_repel(data= electores2011 %>% left_join(matricula2010) %>% filter(partido=="La Matanza"),
+                           aes(label=partido), size=6)+
+  ggrepel::geom_text_repel(data= electores2011 %>% left_join(matricula2010) %>% filter(partido!="La Matanza"),
+                           aes(label=partido), size=3)+
+  theme_classic() +
+ labs(#title="La Matanza, el partido más viejo y más joven del conurbano",
+    x="Electores habilitados cada 100 habitantes, 2011", y="Matrícula escolar cada 100 habitantes, 2010", 
+       caption = "Gráfico: Mauro Infantino y Federico Tiberti. El dato de población de 2010 es el del Censo Nacional, el de 2011 es el de la
+       proyección de INDEC: ttps://www.indec.gob.ar/indec/web/Nivel4-Tema-2-24-119. El dato de matrícula escolar proviene de 
+                  la Dirección General de Cultura y Educación del Gobierno de la Provincia de Buenos Aires. El dato de electores es el del total
+                  de electores habilitados para las elecciones generales de 2011. Fuente: Atlas Electoral de Andy Tow.") +
+  theme(axis.text = element_text(face="bold", size=8), 
+        axis.title = element_text(face= "bold", size=12), 
+        plot.caption = element_text(size=6),
+        plot.title = element_text(size=18, face="bold"))
+
+```
+ 
+ En conclusión, todo parece indicar que la población registrada por el censo del año 2010 fue mayor que la realmente existente en La Matanza. Si bien los datos que analizamos son solo sugestivos y no permiten concluirlo con plena certeza, la sobreestimación en el censo 2010 es la única hipótesis consistente con que se observen, solo en La Matanza y solo en 2010, discontinuidades tan marcadas en variables como electores o alumnos cada 100 habitantes. También explicaría la divergencia que muestra La Matanza en los resultados de la pandemia. No, no tuvo una mortalidad atípicamente baja. No tuvo, tampoco, una población particularmente reticente a vacunarse contra el coronavirus, ni particularmente desinteresada en recibir el Ingreso Familiar de Emergencia. Simplemente su población es menor que la que creíamos. Esperemos contar pronto con los resultados del censo de este año, para tener una mejor noción de un dato tan importante como el de la población de cada distrito.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
