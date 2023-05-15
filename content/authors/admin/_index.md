@@ -2,7 +2,7 @@
 bio: My interests include comparative political economy, development, statistical methods and data science.
 education:
   courses:
-  - course: PhD Politics
+  - course: PhD in Politics
     institution: Princeton University
     year: 2023
   - course: MA in Politics
@@ -20,7 +20,7 @@ interests:
 organizations:
 - name: Princeton University
   url: https://www.politics.princeton.edu/
-role: Ph.D. Candidate in Politics
+role: Ph.D. in Politics
 social:
 - icon: envelope
   icon_pack: fas
@@ -44,5 +44,7 @@ title: Federico Tiberti
 I hold a PhD in Politics from Princeton University. Most of my work lays in the field of historical political economy of development and the interplay between state formation and economic development in the long run. My dissertation studies the conditions under which political regime change can cause state capture and decay. At Princeton, I taught comparative politics, quantitative methods and R programming, which earned me the [George A. Kateb teaching award](https://politics.princeton.edu/news/four-graduate-students-receive-kateb-preceptor-award). I also served as student coordinator of the Latin American Politics Workshop and the [Comparative Politics Colloquium](https://politics.princeton.edu/event-series/comparative-politics-colloquium), as an editorial assistant for [World Politics](https://www.cambridge.org/core/journals/world-politics) for three years, and as a data analysis consultant at the [Stokes Viz Hub](https://libguides.princeton.edu/c.php?g=961088&p=6940518).
 
 Before coming to Princeton, I got a BA in Political Science from [Universidad de San Andres](https://udesa.edu.ar/), Argentina, and worked in policy analysis in national and subnational govenment agencies. I also co-authored a general-interest [book on political development in Argentina](https://www.loc.gov/item/2014510963/).
+
+I 
 
 {{< icon name="download" pack="fas" >}} View my {{< staticref "uploads/cv_tiberti_mar21.pdf" "newtab" >}}CV{{< /staticref >}}.
