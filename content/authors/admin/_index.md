@@ -47,4 +47,4 @@ I have also worked as a consultant at the [Inter-American Development Bank](http
 
 Before coming to Princeton, I got a BA in Political Science from [Universidad de San Andres](https://udesa.edu.ar/), Argentina, and worked in policy analysis in national and subnational government agencies. I also co-authored a general-interest [book on political development in Argentina](https://www.loc.gov/item/2014510963/).
 
-{{< icon name="download" pack="fas" >}} View my {{< staticref "uploads/cv_tiberti_mar21.pdf" "newtab" >}}CV{{< /staticref >}}.
+{{< icon name="download" pack="fas" >}} View my {{< staticref "uploads/cv_tiberti.pdf" "newtab" >}}CV{{< /staticref >}} or a {{< staticref "uploads/resume_tiberti.pdf" "newtab" >}}one-page resume{{< /staticref >}}.
