@@ -3,7 +3,7 @@ title: "Una Shiny App para visualizar encuestas electorales de Argentina"
 author: "Federico Tiberti"
 date: "2023-03-31"
 slug: "shiny-app-encuestas"
-runtime: shiny
+#runtime: shiny
 categories: R
 image:
   caption: ''
