@@ -21,8 +21,13 @@ Hace un par de semanas, dando vueltas por internet, me encontré con el [Observa
 
 Sin embargo, el de LPO me llamò la atención por la poca cantidad de encuestas que enumera. Solo hay 14 en los últimos 6 meses, cuando en los diarios aparecen una o dos nuevas por semana. Unos días después, un amigo de Twitter me compartió [una página de Wikipedia](https://es.wikipedia.org/wiki/Anexo:Encuestas_de_intenci%C3%B3n_de_voto_para_las_elecciones_presidenciales_de_Argentina_de_2023) donde algún héroe anónimo viene listando muchas más encuestas.
 
-Scrapeé las tablas (quizás deje el código en otro posteo, pero las últimas actualizaciones de [rvest](https://rvest.tidyverse.org/) lo dejaron funcionando _muy_ bien y a prueba de gente que sepa _muy_ poco de html, como es mi caso) y armé una app en Shiny muy sencilla para visualizar las encuestas. La dejo abajo.
+Scrapeé las tablas (quizás deje el código en otro posteo, pero las últimas actualizaciones de [rvest](https://rvest.tidyverse.org/) lo dejaron funcionando _muy_ bien y a prueba de gente que sepa _muy_ poco de html, como es mi caso) y armé una app en Shiny muy sencilla para visualizar las encuestas. 
 
+<p style="margin-left: 40px;">
+**Actualización el 19 de junio**: la app se hizo bastante popular y decidí publicarla via shinyapps.io y compartir el código. Se puede acceder a través de [este link](https://fedetiberti.shinyapps.io/encuestas_app/). El código completo está disponible en [mi Github](https://github.com/fedetiberti/encuestas_app/blob/main/app_encuestas.R). Agradezco a [El Economista](https://eleconomista.com.ar/) haberse interesado en la app y haberla [publicado en su sitio web](https://eleconomista.com.ar/encuestas-2023).
+</p>
+
+Dejo embebida la app acá abajo:
 
 
 ```{r , echo=FALSE}
