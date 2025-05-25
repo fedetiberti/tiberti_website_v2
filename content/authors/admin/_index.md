@@ -18,9 +18,9 @@ interests:
 - Comparative International Development
 - Quantitative and Computational Methods
 organizations:
-- name: Princeton University
-  url: https://www.politics.princeton.edu/
-role: Ph.D. in Politics
+- name: World Bank Group
+  url: https://www.worldbank.org/
+role: Data Scientist
 social:
 - icon: envelope
   icon_pack: fas
